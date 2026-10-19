@@ -98,7 +98,7 @@ def footer(full):
         <li><a target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=com.trainerize.animalparadisegyms">Google Play</a></li>
         </ul></div>
     </div>
-    <div class="legal"><span>© 2026 Animal Paradise Gyms · Vineland, NJ</span><span>Website and marketing by Leads Magnets</span></div>
+    <div class="legal"><span>© 2026 Animal Paradise Gyms · Vineland, NJ · <a href="privacy-policy.html">Privacy Policy</a> · <a href="terms-of-service.html">Terms of Service</a></span><span>Website and marketing by Leads Magnets</span></div>
   </div>
 </footer>
 <div class="mbar"><a class="btn btn-glass" href="visit.html">Call or visit</a><a class="btn btn-gold" href="visit.html#tour">Free tour</a></div>
@@ -1465,6 +1465,15 @@ PAGES["thank-you.html"] = dict(
   {card("users", "Meet the coaches", "Chuck, Hakim and Lauren. Personal training is booked separately from membership.", "personal-training.html", "See coaching")}
   {card("cup", "While you are here", "Animal Cafe and Animal Supps are inside the gym, open 4AM to 12AM.", "animal-cafe.html", "See the cafe")}
 </div></section>''')
+import markdown as _mdl
+def legal_page(slug, title, h1, desc):
+    body = _mdl.markdown(open(f"legal/{slug}.md").read(), extensions=["tables"])
+    body = body.replace("<table>", '<div class="legal-tbl"><table>').replace("</table>", "</table></div>")
+    PAGES[f"{slug}.html"] = dict(title=title, desc=desc, slug=slug, schemas=[crumbs_ld(h1, slug)],
+        body=page_hero("Legal", f'{h1}<span class="gold">.</span>', "Animal Paradise Gyms, 3849 S Delsea Dr, Suite E000, Vineland, NJ 08360.", h1, ctas=False, bg="hero-floor")
+        + f'<section class="band"><div class="wrap"><article class="prose legal-doc">{body}</article></div></section>')
+legal_page("privacy-policy", "Privacy Policy | Animal Paradise Gyms", "Privacy Policy", "How Animal Paradise Gyms in Vineland, NJ collects, uses and protects your personal information, and how to exercise your privacy rights.")
+legal_page("terms-of-service", "Terms of Service | Animal Paradise Gyms", "Terms of Service", "Website terms and conditions of use for animalparadisegyms.com, operated by Animal Paradise, LLC in Vineland, NJ.")
 WAIVER = open("waiver_text.html").read()
 PAGES["parent-consent-form.html"] = dict(
     title="Parent Consent Waiver | Animal Paradise Gyms, Vineland NJ",

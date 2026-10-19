@@ -544,3 +544,9 @@ a.who-card{text-decoration:none}
 .wv-frame{width:100%;min-height:1400px;border:0;border-radius:14px;background:#fff}
 @media(max-width:900px){.wv-wrap{grid-template-columns:1fr}.wv{max-height:none}.wv-sign{position:static}}
 .wv-skip{display:none;margin-bottom:14px}@media(max-width:900px){.wv-skip{display:inline-block}}
+/* legal pages */
+.legal-doc{max-width:860px}.legal-doc h2{margin-top:34px}
+.legal-tbl{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:12px}
+.legal-tbl table{border-collapse:collapse;min-width:820px;font-size:13.5px}
+.legal-tbl th,.legal-tbl td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.legal a{color:inherit;text-decoration:underline;text-underline-offset:3px}
