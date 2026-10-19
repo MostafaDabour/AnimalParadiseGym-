@@ -11,7 +11,7 @@
   },
   // signed parent consent waivers (signature, record, printable copy)
   "r2_buckets": [{ "binding": "WAIVERS", "bucket_name": "apg-waivers" }],
-  // WAIVER_WEBHOOK (GHL inbound webhook) is set in the Cloudflare dashboard; keep it across deploys
-  "keep_vars": true,
+  // GHL inbound webhook; payload field "form" is "parent-consent-waiver" (tour forms send "tour" etc.)
+  "vars": { "WAIVER_WEBHOOK": "https://services.leadconnectorhq.com/hooks/31VwWnIDdjlwKYy4I7QI/webhook-trigger/b23536f8-c971-4baa-9478-b0058a9c36c4" },
   "observability": { "enabled": true }
 }

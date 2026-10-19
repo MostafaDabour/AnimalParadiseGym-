@@ -6,7 +6,7 @@ import os, re, shutil, glob, json, datetime
 SITE = "https://animalparadisegyms.com"
 GTM = "GTM-MRFZPWTB"
 PIXEL = "446714868529209"
-WEBHOOK = os.environ.get("APG_WEBHOOK", "")          # GHL inbound webhook URL for the tour forms
+WEBHOOK = os.environ.get("APG_WEBHOOK", "https://services.leadconnectorhq.com/hooks/31VwWnIDdjlwKYy4I7QI/webhook-trigger/b23536f8-c971-4baa-9478-b0058a9c36c4")          # GHL inbound webhook URL for the tour forms
 SRC, OUT = "deploy", "dist"
 
 shutil.rmtree(OUT, ignore_errors=True)
