@@ -9,11 +9,11 @@ __pycache__/
 *.b64
 patch_*.py
 pages[0-9].py
-extra.css
-src.html
+/extra.css
+/src.html
 /index.html
 /img/
-logo-src.webp
-gorilla.png
-logo.png
-seo-pack.md
+/logo-src.webp
+/gorilla.png
+/logo.png
+/seo-pack.md
