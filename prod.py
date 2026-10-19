@@ -55,6 +55,55 @@ for fn, (url, html) in pages.items():
 
 for d in ("css", "js", "img", "video"):
     shutil.copytree(os.path.join("site", d), os.path.join(OUT, d))
+
+# ---- image performance: mobile-size variants, srcset, intrinsic sizes ----
+from PIL import Image
+VARIANTS = (760, 1200)
+dims = {}
+for f in glob.glob(os.path.join("site", "img", "**", "*.*"), recursive=True):
+    if f.endswith((".webp", ".png", ".jpg")):
+        rel = "/" + os.path.relpath(f, "site").replace(os.sep, "/")
+        with Image.open(f) as im:
+            dims[rel] = im.size
+            if rel.startswith(("/img/photos/", "/img/events/")):
+                for vw in VARIANTS:
+                    if im.size[0] > vw + 200:
+                        out = os.path.join(OUT, rel[1:]).replace(".webp", f"-{vw}.webp")
+                        im.resize((vw, round(im.size[1] * vw / im.size[0])), Image.LANCZOS).save(out, "WEBP", quality=78, method=6)
+
+def img_tag(m):
+    tag = m.group(0)
+    src = re.search(r'src="([^"]+)"', tag)
+    if not src or src.group(1) not in dims: return tag
+    u = src.group(1); w, h = dims[u]
+    if "width=" not in tag:
+        tag = tag.replace("<img ", f'<img width="{w}" height="{h}" ', 1)
+    vs = [(vw, u.replace(".webp", f"-{vw}.webp")) for vw in VARIANTS]
+    vs = [(vw, v) for vw, v in vs if v != u and os.path.exists(os.path.join(OUT, v[1:]))]
+    if "srcset=" not in tag and vs:
+        if 'class="gimg"' in tag: sizes = "(max-width: 700px) 50vw, (max-width: 1100px) 33vw, 25vw"
+        elif "data-hero" in tag: sizes = "100vw"
+        else: sizes = "(max-width: 900px) 100vw, 50vw"
+        srcset = ", ".join(f"{v} {vw}w" for vw, v in vs) + f", {u} {w}w"
+        tag = tag.replace("<img ", f'<img srcset="{srcset}" sizes="{sizes}" ', 1)
+    return tag
+
+def tune_images(html):
+    # the first photo in a hero is the LCP: mark it, load it eagerly and with priority
+    html = html.replace('<div class="ph hero-bg"><img ', '<div class="ph hero-bg"><img data-hero ', 1)
+    return re.sub(r"<img [^>]+>", img_tag, html)
+
+for path in glob.glob(os.path.join(OUT, "**", "*.html"), recursive=True):
+    t = open(path).read(); t2 = tune_images(t)
+    if t2 != t: open(path, "w").write(t2)
+
+# cache-bust css/js so they can be cached for a year
+import hashlib as _h
+for asset in ("css/site.css", "js/site.js"):
+    v = _h.md5(open(os.path.join(OUT, asset), "rb").read()).hexdigest()[:8]
+    for path in glob.glob(os.path.join(OUT, "**", "*.html"), recursive=True):
+        t = open(path).read()
+        if f"/{asset}\"" in t: open(path, "w").write(t.replace(f"/{asset}\"", f"/{asset}?v={v}\""))
 shutil.copy(os.path.join("site", "favicon.ico"), os.path.join(OUT, "favicon.ico"))
 
 # 301s from the old WordPress addresses
@@ -71,7 +120,7 @@ REDIRECTS = [
     ("/cart/", "/animal-supps/"), ("/checkout/", "/animal-supps/"), ("/my-account/", "/animal-supps/"),
 ]
 with open(os.path.join(OUT, "_redirects"), "w") as f:
-    for a, b in REDIRECTS:
+    for a, b in sorted(REDIRECTS, key=lambda r: "*" in r[0]):  # exact rules first, splats last
         f.write(f"{a} {b} 301\n")
         if not a.endswith("*") and a.endswith("/") and a != "/":
             f.write(f"{a.rstrip('/')} {b} 301\n")
@@ -110,11 +159,29 @@ with open(os.path.join(OUT, "llms.txt"), "w") as f:
 
 ## Key pages
 """)
-    for u in ["/", "/memberships/", "/the-gym/", "/personal-training/", "/lioness-den/", "/animal-cafe/", "/animal-supps/", "/visit/", "/faq/", "/events/", "/blog/"]:
-        f.write(f"- {SITE}{u}\n")
+    for u, label in [("/", "Home"), ("/memberships/", "Memberships and prices"), ("/the-gym/", "Equipment and amenities"),
+                     ("/personal-training/", "Personal training and contest prep"), ("/lioness-den/", "Lioness Den women's-only area"),
+                     ("/animal-cafe/", "Animal Cafe"), ("/animal-supps/", "Animal Supps"), ("/visit/", "Hours, directions, free tour"),
+                     ("/faq/", "FAQ"), ("/events/", "Events, including Animal Fest"), ("/gallery/", "Photo gallery"), ("/blog/", "Blog")]:
+        f.write(f"- [{label}]({SITE}{u})\n")
+    f.write("\n## Coaches\n- [Chuck: NPC contest prep]({0}/trainer/chuck/)\n- [Hakim: NASM certified personal trainer]({0}/trainer/hakim/)\n- [Lauren: female personal trainer]({0}/trainer/lauren/)\n".format(SITE))
+    f.write("\n## Quick answers\n"
+            "- Hours: every day 4AM to 12AM, including weekends.\n"
+            "- Cheapest membership: Gold, $60 a month on a 12-month plan. Month to month: Silver, $70.\n"
+            "- Personal training is booked separately from membership. The first consultation is free.\n"
+            "- Women's-only area: the Lioness Den, included with Platinum ($70) and Diamond ($80).\n"
+            "- Recovery: sauna with every plan; Hibernation Station (massage chairs, compression) with Premium and Diamond; red light therapy and tanning on site.\n"
+            "- Parking: free, right at the door.\n")
+    import re as _re
+    posts = []
+    for fn, (url, html) in pages.items():
+        if '"BlogPosting"' in html:
+            t = _re.search(r"<h1[^>]*>(.*?)</h1>", html, _re.S)
+            posts.append((url, _re.sub(r"<[^>]+>", "", t.group(1)).strip() if t else url))
+    f.write("\n## Articles\n" + "".join(f"- [{t}]({SITE}{u})\n" for u, t in sorted(posts, key=lambda x: x[1])))
 
 with open(os.path.join(OUT, "_headers"), "w") as f:
     f.write("/img/*\n  Cache-Control: public, max-age=31536000, immutable\n/video/*\n  Cache-Control: public, max-age=31536000, immutable\n"
-            "/css/*\n  Cache-Control: public, max-age=86400\n/js/*\n  Cache-Control: public, max-age=86400\n")
+            "/css/*\n  Cache-Control: public, max-age=31536000, immutable\n/js/*\n  Cache-Control: public, max-age=31536000, immutable\n")
 
 print(f"dist: {len(pages)} pages, {len(sitemap)} in sitemap, {len(REDIRECTS)} redirect rules, webhook {'SET' if WEBHOOK else 'NOT SET'}")

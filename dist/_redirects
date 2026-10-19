@@ -20,9 +20,6 @@
 /animal-paradise-the-ultimate-luxurious-gym-experience /the-gym/ 301
 /trainer/ /personal-training/ 301
 /trainer /personal-training/ 301
-/category/* /blog/ 301
-/tag/* /blog/ 301
-/author/* /blog/ 301
 /feed/ /blog/ 301
 /feed /blog/ 301
 /home/ / 301
@@ -33,3 +30,6 @@
 /checkout /animal-supps/ 301
 /my-account/ /animal-supps/ 301
 /my-account /animal-supps/ 301
+/category/* /blog/ 301
+/tag/* /blog/ 301
+/author/* /blog/ 301

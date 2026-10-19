@@ -28,7 +28,41 @@ def crumbs_ld(name, slug):
         {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE + "/"},
         {"@type": "ListItem", "position": 2, "name": name, "item": f"{SITE}/{slug}/"}]}
 
+SEO_SHORT = {
+    "does-cardio-kill-gains-why-cardio-matters-when-bulking-or-cutting": "Does Cardio Kill Gains? Cardio When Bulking or Cutting",
+    "mobility-and-strength-training-why-better-movement-can-help-you-lift-better": "Mobility and Strength Training: Move Better, Lift Better",
+    "should-you-work-out-when-youre-sore-a-physical-therapy-inspired-recovery-guide": "Should You Work Out When Sore? A Recovery Guide",
+    "the-strategies-experienced-lifters-use-to-build-muscle-without-gaining-excess-fat": "How to Build Muscle Without Gaining Excess Fat",
+    "the-strategies-experienced-lifters-use-to-lose-fat-without-sacrificing-muscle": "How to Lose Fat Without Losing Muscle",
+    "what-makes-a-good-gym-in-2026-what-to-look-for-before-you-join-or-build-one": "What Makes a Good Gym in 2026? What to Look For",
+    "what-is-the-stomach-vacuum-the-deep-core-exercise-everyone-should-know": "What Is the Stomach Vacuum? The Deep Core Exercise",
+    "gym-open-late-vineland-nj": "Late-Night and Early-Morning Gym in Vineland NJ",
+    "sauna-massage-compression-recovery": "Sauna, Massage Chairs and Compression: Recovery Guide",
+    "first-week-at-the-gym-beginners": "Your First Week at the Gym: A Beginner Plan",
+    "how-long-does-it-actually-take-to-see-results-from-working-out": "How Long Does It Take to See Workout Results?",
+    "protein-shake-before-or-after-workout": "Protein Shake Before or After a Workout?",
+    "womens-only-gym-south-jersey": "Women's-Only Gym in South Jersey: The Lioness Den",
+    "the-biggest-nutrition-mistakes-people-make-after-a-workout": "The Biggest Post-Workout Nutrition Mistakes",
+    "first-npc-show-prep-guide": "How to Prep for Your First NPC Show",
+    "creatine-for-beginners": "Creatine for Beginners: What It Does and How to Take It",
+    "do-i-really-need-a-personal-trainerheres-how-to-know": "Do I Really Need a Personal Trainer?",
+    "8-fitness-myths-that-make-getting-healthy-feel-harder": "8 Fitness Myths That Make Getting Healthy Harder",
+}
+def seo_title(p):
+    t = SEO_SHORT.get(p["slug"], p["title"])
+    for suf in (" | Animal Paradise Gyms", " | Animal Paradise", ""):
+        if len(t + suf) <= 62: return t + suf
+    return t
+
+def trim_desc(d, n=158):
+    if len(d) <= n: return d
+    cut = d[:n]
+    i = cut.rfind(". ")
+    if i > 90: return cut[:i + 1]
+    return cut[:cut.rfind(" ")].rstrip(",;:") + "."
+
 def head(title, desc, slug, schemas, full):
+    desc = trim_desc(desc)
     canon = SITE + ("/" if slug == "" else f"/{slug}/")
     meta = f'''<title>{title}</title>
 <meta name="description" content="{desc}">
@@ -89,9 +123,9 @@ def footer(full):
         <img src="img/logo.png" alt="Animal Paradise Gyms" width="177" height="52">
         <p style="max-width:36ch">The full-service gym inside Cumberland Mall in Vineland, NJ. Open every day, 4AM to 12AM.</p>
       </div>
-      <div><h4>Explore</h4><ul>{links}</ul></div>
-      <div><h4>Visit</h4><ul><li>3849 S Delsea Dr, Suite E000</li><li>Cumberland Mall, Vineland, NJ 08360</li><li>(856) 839-4536</li><li>Info@AnimalParadiseGyms.com</li><li><a href="visit.html">Hours and directions</a></li></ul></div>
-      <div><h4>Follow</h4><ul>
+      <div><h2 class="fh">Explore</h2><ul>{links}</ul></div>
+      <div><h2 class="fh">Visit</h2><ul><li>3849 S Delsea Dr, Suite E000</li><li>Cumberland Mall, Vineland, NJ 08360</li><li>(856) 839-4536</li><li>Info@AnimalParadiseGyms.com</li><li><a href="visit.html">Hours and directions</a></li></ul></div>
+      <div><h2 class="fh">Follow</h2><ul>
         <li><a target="_blank" rel="noopener" href="https://animalcafe.net/">Animal Cafe site</a></li>
         <li><a target="_blank" rel="noopener" href="https://animalsupps.co/">Shop Animal Supps</a></li>
         <li><a target="_blank" rel="noopener" href="https://www.instagram.com/animalparadisegyms">Instagram</a></li>
@@ -249,6 +283,9 @@ GYM_LD = {
     "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "04:00", "closes": "24:00"}],
     "amenityFeature": [{"@type": "LocationFeatureSpecification", "name": n, "value": True} for n in ["Sauna", "Free parking", "Childcare", "Women's-only training area", "80-foot functional training turf", "Fit3D body composition scanner", "Posing room", "Recovery room", "Red light therapy", "Tanning beds"]],
     "founder": [{"@type": "Person", "name": "Pete"}, {"@type": "Person", "name": "Andrew"}],
+    "geo": {"@type": "GeoCoordinates", "latitude": 39.432, "longitude": -75.036},
+    "hasMap": "https://www.google.com/maps/search/?api=1&query=Animal+Paradise+Gyms+3849+S+Delsea+Dr+Vineland+NJ+08360",
+    "containedInPlace": {"@type": "ShoppingCenter", "name": "Cumberland Mall", "address": "3849 S Delsea Dr, Vineland, NJ 08360"},
     "sameAs": ["https://www.instagram.com/animalparadisegyms", "https://www.facebook.com/profile.php?id=61560036899811", "https://apps.apple.com/us/app/animal-paradise-gym/id6745569852"],
 }
 
@@ -307,7 +344,7 @@ PAGES["index.html"] = dict(
     </div>
     <form class="quick" id="quick" data-lead data-form="free-tour" novalidate>
       <span class="eyebrow">No pressure</span>
-      <h3>Book a free tour</h3>
+      <h2>Book a free tour</h2>
       <p>Fifteen minutes, no sales pitch, and a straight answer on price.</p>
       <div class="field"><label for="q-name">Name</label><input id="q-name" data-name autocomplete="name"></div>
       <div class="field"><label for="q-phone">Phone</label><input id="q-phone" type="tel" autocomplete="tel"></div>
@@ -696,7 +733,7 @@ PAGES["lioness-den.html"] = dict(
 
 # ================= ABOUT =================
 PAGES["about.html"] = dict(
-    title="About Animal Paradise Gyms | Founded by Pete and Andrew | Vineland NJ",
+    title="About Animal Paradise Gyms | Pete and Andrew | Vineland NJ",
     desc="Animal Paradise Gyms was built by Pete and Andrew inside Cumberland Mall in Vineland NJ. Our story, our values and the people behind South Jersey's best-equipped gym.",
     slug="about", schemas=[crumbs_ld("About", "about"), {"@context": "https://schema.org", "@type": "AboutPage", "about": GYM_ID, "url": SITE + "/about/"}],
     body=page_hero("About us", 'Built by lifters, <span class="gold">for everyone.</span>', "Animal Paradise started with two people who couldn't find the gym they wanted in South Jersey, so they built it.", "About", ctas=False, bg="animal-team-mural") + f'''
@@ -918,7 +955,7 @@ PAGES["animal-cafe.html"] = dict(
 {closer("Train hard.", "Eat well.")}''')
 
 PAGES["animal-supps.html"] = dict(
-    title="Animal Supps | Supplement Store in Vineland NJ | Protein, Pre-Workout",
+    title="Animal Supps | Supplement Store in Vineland NJ",
     desc="Animal Supps supplement store inside Animal Paradise Gyms, Cumberland Mall, Vineland NJ. Pre-workout, protein, creatine and aminos. Open 4AM to 12AM. Shop in store or online at animalsupps.co.",
     slug="animal-supps",
     schemas=[crumbs_ld("Animal Supps", "animal-supps"), faq_ld(SUPPS_FAQ),
@@ -993,7 +1030,7 @@ COACH_PAGES = {
     "hakim": dict(
         h1='Hakim, <span class="gold">NASM certified trainer</span>',
         lede="An exercise science degree, three years on the floor and a clinical background from Inspira.",
-        title="Hakim | NASM Certified Personal Trainer in Vineland NJ | Animal Paradise",
+        title="Hakim | NASM Certified Personal Trainer | Vineland NJ",
         desc="Train with Hakim, NASM certified personal trainer at Animal Paradise Gyms in Vineland NJ. Exercise science degree and clinical background. Book a free consultation.",
         about=["Hakim holds an exercise science degree and is NASM certified. Before coaching full time he worked in a clinical setting at Inspira, which shapes how he coaches: technique first, then load.",
                "He has spent three years on the gym floor helping members learn the basics, return from time off and build a routine that sticks."],
@@ -1133,7 +1170,7 @@ PAGES["events.html"] = dict(
 {closer("Be part of", "the next one.")}''')
 
 PAGES["animal-fest-3.html"] = dict(
-    title="Animal Fest 3 | Bodybuilding Event at Animal Paradise Gyms, Vineland NJ",
+    title="Animal Fest 3 | Bodybuilding Event in Vineland NJ",
     desc="Animal Fest 3 took place October 10, 2026 at Animal Paradise Gyms, Cumberland Mall, Vineland NJ. Guest posing, competitions, vendors, medals and the Animal Fest III champion belt.",
     slug="animal-fest-3",
     schemas=[FEST_LD, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
@@ -1221,7 +1258,7 @@ for p in POSTS:
 chips = '<button class="chip" aria-pressed="true" data-cat="all">All</button>' + "".join(f'<button class="chip" aria-pressed="false" data-cat="{c}">{c}</button>' for c in cats)
 grid = "".join(post_card(p).replace('<a class="pcard', f'<a data-cat="{p["cat"]}" class="pcard', 1) for p in POSTS[1:])
 PAGES["blog.html"] = dict(
-    title="Animal Paradise Blog | Training, Nutrition and Gym Advice | Vineland NJ",
+    title="Gym Blog | Training and Nutrition Advice | Vineland NJ",
     desc="Training, nutrition, contest prep and recovery advice from Animal Paradise Gyms in Vineland NJ. Beginner guides, membership costs and local gym tips.",
     slug="blog",
     schemas=[crumbs_ld("Blog", "blog"), {"@context": "https://schema.org", "@type": "Blog", "name": "Animal Paradise Blog", "url": SITE + "/blog/", "publisher": GYM_ID,
@@ -1283,7 +1320,7 @@ for p in POSTS:
         return re.sub(r"<tr>(?:(?!</tr>).)*</tr>", row, t, flags=re.S)
     body = re.sub(r'<table class="post-tbl">.*?</table>', _lbl, body, flags=re.S)
     PAGES[p["slug"] + ".html"] = dict(
-        title=f'{p["title"]} | Animal Paradise Gyms', desc=p["desc"], slug=p["slug"], nav_active="blog.html",
+        title=seo_title(p), desc=p["desc"], slug=p["slug"], nav_active="blog.html",
         schemas=[{"@context": "https://schema.org", "@type": "BlogPosting", "headline": p["title"], "description": p["desc"],
                   "datePublished": p["date"], "dateModified": p["date"], "image": f'{SITE}/img/photos/vineland-gym-{p["img"]}.webp',
                   "author": {"@type": "Organization", "name": "Animal Paradise Gyms", "url": SITE + "/"}, "publisher": GYM_ID,
@@ -1317,7 +1354,7 @@ AF2_GALLERY = [("crowd-gym-floor", "Crowd on the gym floor at Animal Fest 2"), (
     ("stage-medals", "Medals awarded on stage"), ("guest-athlete", "Guest athlete meeting fans at Animal Fest 2"),
     ("bikini-medal", "Bikini competitor receiving her medal on stage"), ("crowd-screen", "Crowd watching the big screen at Animal Fest 2")]
 PAGES["animal-fest-2.html"] = dict(
-    title="Animal Fest 2 | October 25, 2025 at Animal Paradise Gyms, Vineland NJ",
+    title="Animal Fest 2 | Oct 25, 2025 | Animal Paradise Gyms",
     desc="Animal Fest 2 took place October 25, 2025 at Animal Paradise Gyms in Vineland NJ: vendors, guest athletes, medals on stage and a packed gym floor. See the photos.",
     slug="animal-fest-2", nav_active="events.html",
     schemas=[{"@context": "https://schema.org", "@type": "Event", "name": "Animal Fest 2",
@@ -1433,7 +1470,7 @@ def _gal_items():
     out = []
     for i, (src, cat, cap) in enumerate(GAL):
         out.append(f'<button class="gitem" type="button" data-cat="{cat}" data-i="{i}" aria-label="Open photo: {cap}">'
-                   f'<img loading="lazy" src="img/{src}.webp" alt="{cap} at Animal Paradise Gyms, Vineland NJ">'
+                   f'<img class="gimg" loading="lazy" decoding="async" src="img/{src}.webp" alt="{cap} at Animal Paradise Gyms, Vineland NJ">'
                    f'<span class="gcap"><b>{cap}</b><small>{_GL[cat]}</small></span></button>')
     return "".join(out)
 
@@ -1483,7 +1520,7 @@ def legal_page(slug, title, h1, desc):
 legal_page("privacy-policy", "Privacy Policy | Animal Paradise Gyms", "Privacy Policy", "How Animal Paradise Gyms in Vineland, NJ collects, uses and protects your personal information, and how to exercise your privacy rights.")
 legal_page("terms-of-service", "Terms of Service | Animal Paradise Gyms", "Terms of Service", "Website terms and conditions of use for animalparadisegyms.com, operated by Animal Paradise, LLC in Vineland, NJ.")
 PAGES["do-not-sell.html"] = dict(
-    title="Do Not Sell or Share My Personal Information | Animal Paradise Gyms",
+    title="Do Not Sell or Share My Info | Animal Paradise Gyms",
     desc="Opt out of the sale or sharing of your personal information, or make another privacy request to Animal Paradise Gyms in Vineland, NJ.",
     slug="do-not-sell", schemas=[crumbs_ld("Do Not Sell or Share My Personal Information", "do-not-sell")],
     body=page_hero("Your privacy choices", 'Do not sell or share <span class="gold">my information.</span>', "Use this form to opt out of the sale or sharing of your personal information, or to make another privacy request. We respond within 45 days.", "Do Not Sell or Share", ctas=False, bg="hero-floor") + f'''

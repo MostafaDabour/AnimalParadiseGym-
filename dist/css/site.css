@@ -27,7 +27,7 @@ html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 body::before{content:"";position:fixed;inset:0;z-index:100;pointer-events:none;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 a{color:inherit}
-img{max-width:100%;display:block}
+img{max-width:100%;height:auto;display:block}
 h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:-.02em;line-height:1.02;text-wrap:balance;margin:0}
 h2{font-size:clamp(32px,4.8vw,62px)}
 h3{font-size:clamp(19px,1.7vw,23px);font-weight:700;letter-spacing:-.01em;line-height:1.15}
@@ -94,7 +94,7 @@ p{margin:0}
 .hs b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(20px,2.2vw,26px);letter-spacing:-.02em}
 .hs span{font-size:13.5px;color:var(--muted)}
 .quick{padding:28px;border-radius:24px;background:rgba(22,20,17,.62);border:1px solid rgba(212,174,82,.28);backdrop-filter:blur(18px);box-shadow:0 30px 80px -30px rgba(0,0,0,.8);display:grid;gap:14px}
-.quick h3{font-size:22px}
+.quick h3,.quick h2{font-size:22px}
 .quick p{color:var(--muted);font-size:15px}
 .quick .btn{width:100%}
 @media (max-width:900px){.hero .wrap{grid-template-columns:1fr}.hero-stats{grid-template-columns:1fr 1fr 1fr}}
@@ -113,7 +113,7 @@ p{margin:0}
 /* brand marquee */
 .brands{border-block:1px solid var(--line);overflow:hidden;padding-block:26px;mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
 .track{display:flex;width:max-content;gap:72px;animation:slide 40s linear infinite}
-.brands span{font-family:var(--wide);font-size:clamp(15px,1.6vw,20px);letter-spacing:.2em;color:rgba(242,236,223,.45);white-space:nowrap}
+.brands span{font-family:var(--wide);font-size:clamp(15px,1.6vw,20px);letter-spacing:.2em;color:rgba(242,236,223,.62);white-space:nowrap}
 .brands span:nth-child(odd){color:var(--gold)}
 @keyframes slide{to{transform:translateX(-50%)}}
 
@@ -281,7 +281,7 @@ p{margin:0}
 footer{border-top:1px solid var(--line);padding-block:64px 110px;font-size:15px;color:var(--muted)}
 .foot{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:32px}
 .foot img{height:52px;width:auto}
-.foot h4{font-family:var(--wide);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);margin:0 0 16px;font-weight:400}
+.foot .fh{font-family:var(--wide);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);margin:0 0 16px;font-weight:400}
 .foot ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 .foot a{text-decoration:none}
 .foot a:hover{color:var(--gold)}
@@ -463,7 +463,7 @@ a.who-card{text-decoration:none}
   .tile .tag,.tbody .role,.coach .role{font-size:11px;letter-spacing:.14em}
   .badge{font-size:10.5px}
   .tstep .when{font-size:11.5px}
-  .foot h4{font-size:12px}
+  .foot .fh{font-size:12px}
   .nap dt{font-size:11px}
   .pmeta{font-size:13px}
   .foot ul{gap:0}
