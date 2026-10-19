@@ -100,7 +100,7 @@ def footer(full):
         <li><a target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=com.trainerize.animalparadisegyms">Google Play</a></li>
         </ul></div>
     </div>
-    <div class="legal"><span>© 2026 Animal Paradise Gyms · Vineland, NJ · <a href="privacy-policy.html">Privacy Policy</a> · <a href="terms-of-service.html">Terms of Service</a></span><span>Website and marketing by Leads Magnets</span></div>
+    <div class="legal"><span>© 2026 Animal Paradise Gyms · Vineland, NJ · <a href="privacy-policy.html">Privacy Policy</a> · <a href="terms-of-service.html">Terms of Service</a> · <a href="do-not-sell.html">Do Not Sell or Share My Personal Information</a></span><span>Website and marketing by Leads Magnets</span></div>
   </div>
 </footer>
 <div class="mbar"><a class="btn btn-glass" href="visit.html">Call or visit</a><a class="btn btn-gold" href="visit.html#tour">Free tour</a></div>
@@ -161,10 +161,11 @@ def team_cards(link=True):
 
 def founders_card():
     return f'''<div class="founders-card rv">
-  <div class="tshot"><img loading="lazy" src="img/founders-pete-andrew.webp" alt="Pete and Andrew, founders of Animal Paradise Gyms in Vineland NJ"></div>
+  <div class="tshot"><img loading="lazy" src="img/founders-pete-andrew.webp" alt="Pete (left) and Andrew (right), founders of Animal Paradise Gyms in Vineland NJ"></div>
   <div class="tbody">
     <span class="role">Founders</span>
     <h3>Pete &amp; Andrew</h3>
+    <p class="fine" style="margin:-6px 0 0">Pete on the left, Andrew on the right.</p>
     <p>Two lifters who wanted a gym South Jersey didn't have, so they built it inside Cumberland Mall. You will still find them on the floor most days, and they still answer the questions nobody else can.</p>
     <a class="textlink" href="about.html">Read our story →</a>
   </div>
@@ -232,6 +233,7 @@ FAQ_AMEN = [
     ("Does Animal Paradise have a women's-only area?", "Yes. The Lioness Den is a women's-only training space with its own free weights, machines and cables, included with Platinum and Diamond memberships."),
     ("What is the Hibernation Station?", "Our recovery room, with massage chairs and compression sleeves to help you recover between sessions. It is included with Premium and Diamond."),
     ("Does the gym have a sauna?", "Yes. Animal Paradise has sauna rooms, and access is included with every membership."),
+    ("Does Animal Paradise have red light therapy or tanning?", "Yes. Animal Paradise Gyms in Vineland has red light therapy and tanning beds on site. Ask the front desk about access and pricing."),
     ("What equipment brands do you have?", "Arsenal, Atlantis, Rogue, Booty Builder and StarTrac, plus an 80-foot functional training turf and full free-weight floors."),
 ]
 
@@ -245,7 +247,7 @@ GYM_LD = {
     "address": {"@type": "PostalAddress", "streetAddress": "3849 S Delsea Dr, Suite E000, Cumberland Mall", "addressLocality": "Vineland", "addressRegion": "NJ", "postalCode": "08360", "addressCountry": "US"},
     "areaServed": ["Vineland NJ", "Millville NJ", "Bridgeton NJ", "Cumberland County NJ", "Glassboro NJ"],
     "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "04:00", "closes": "24:00"}],
-    "amenityFeature": [{"@type": "LocationFeatureSpecification", "name": n, "value": True} for n in ["Sauna", "Free parking", "Childcare", "Women's-only training area", "80-foot functional training turf", "Fit3D body composition scanner", "Posing room", "Recovery room"]],
+    "amenityFeature": [{"@type": "LocationFeatureSpecification", "name": n, "value": True} for n in ["Sauna", "Free parking", "Childcare", "Women's-only training area", "80-foot functional training turf", "Fit3D body composition scanner", "Posing room", "Recovery room", "Red light therapy", "Tanning beds"]],
     "founder": [{"@type": "Person", "name": "Pete"}, {"@type": "Person", "name": "Andrew"}],
     "sameAs": ["https://www.instagram.com/animalparadisegyms", "https://www.facebook.com/profile.php?id=61560036899811", "https://apps.apple.com/us/app/animal-paradise-gym/id6745569852"],
 }
@@ -262,6 +264,7 @@ ICONS = dict(
     flame='<path d="M12 22c4 0 7-3 7-7 0-5-5-7-5-12-3 2-4 5-4 7-1-1-2-2-2-4-2 2-3 5-3 9 0 4 3 7 7 7z"/>',
     scan='<path d="M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4"/><path d="M8 12h8"/>',
     cup='<path d="M5 8h12v5a6 6 0 0 1-12 0V8z"/><path d="M17 9h2a2 2 0 0 1 0 4h-2"/><path d="M8 3v2M11 3v2M14 3v2"/>',
+    sun='<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
     pin='<path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',
 )
 def icon(n):
@@ -346,7 +349,7 @@ PAGES["index.html"] = dict(
       <a class="tile wide rv" href="lioness-den.html" style="text-decoration:none">{ph("img/photos/vineland-gym-lioness-den.webp", "Lioness Den women's-only training area with pink neon wall")}<div class="tile-body"><span class="tag">Women only</span><h3>The Lioness Den</h3><p>Its own free weights, machines and cables. Train without an audience.</p></div></a>
       <a class="tile rv" href="animal-cafe.html" style="text-decoration:none">{ph("img/photos/vineland-gym-animal-cafe.webp", "Animal Cafe counter inside Animal Paradise Gyms")}<div class="tile-body"><span class="tag">Fuel</span><h3>Animal Cafe</h3><p>Shakes, açaí bowls, juice.</p></div></a>
       <a class="tile rv" href="animal-supps.html" style="text-decoration:none">{ph("img/photos/vineland-gym-animal-supps.webp", "Animal Supps supplement shelves")}<div class="tile-body"><span class="tag">Restock</span><h3>Animal Supps</h3><p>Members save up to 10%.</p></div></a>
-      <div class="tile dark wide rv"><div class="tile-body"><span class="tag">Also included</span><h3>The small things that matter</h3><div class="chips"><span>Posing room</span><span>Fit3D scanning</span><span>Daycare</span><span>Towel service</span><span>Pool table lounge</span><span>Free parking</span><span>Member app</span></div></div></div>
+      <div class="tile dark wide rv"><div class="tile-body"><span class="tag">Also included</span><h3>The small things that matter</h3><div class="chips"><span>Posing room</span><span>Fit3D scanning</span><span>Red light therapy</span><span>Tanning</span><span>Daycare</span><span>Towel service</span><span>Pool table lounge</span><span>Free parking</span><span>Member app</span></div></div></div>
     </div>
     <div class="center-row"><a class="btn btn-glass" href="the-gym.html">Explore the full gym {ARROW}</a></div>
   </div>
@@ -470,7 +473,7 @@ PAGES["the-gym.html"] = dict(
         <span class="eyebrow">Take a look</span>
         <h2>Massage chairs, compression <span class="gold">and sauna rooms</span></h2>
         <p>The Hibernation Station is our recovery room: a row of full-body massage chairs and Sharper Image compression therapy boots. Next door, the sauna rooms are open to every member.</p>
-        <ul class="ticks"><li>Full-body massage chairs</li><li>Compression therapy</li><li>Sauna rooms, included with every plan</li><li>Fit3D body scanning</li></ul>
+        <ul class="ticks"><li>Full-body massage chairs</li><li>Compression therapy</li><li>Sauna rooms, included with every plan</li><li>Red light therapy</li><li>Tanning beds</li><li>Fit3D body scanning</li></ul>
         <p><a class="btn btn-glass" href="memberships.html">Plans with the Hibernation Station {ARROW}</a></p>
       </div>
     </div>
@@ -478,6 +481,9 @@ PAGES["the-gym.html"] = dict(
       {card("bolt", "Hibernation Station", "Massage chairs and compression therapy. Included with Premium and Diamond.", "memberships.html", "Plans with recovery")}
       {card("flame", "Sauna rooms", "Included with every membership, from Silver up. Use them after training or on rest days.")}
       {card("scan", "Fit3D body scanning", "A full 3D body composition scan that shows what is changing beyond the scale. $20 per scan.")}
+      {card("sun", "Red light therapy", "Red light therapy sessions on site for recovery days. Ask the front desk how to book.")}
+      {card("sun", "Tanning beds", "Tanning beds on site, so stage prep and photo days do not need a second stop.")}
+      {card("back", "Stretching and mobility", "Open space to warm up, stretch and cool down, so tight hips never cut a session short.")}
     </div>
   </div>
 </section>
@@ -1476,6 +1482,33 @@ def legal_page(slug, title, h1, desc):
         + f'<section class="band"><div class="wrap"><article class="prose legal-doc">{body}</article></div></section>')
 legal_page("privacy-policy", "Privacy Policy | Animal Paradise Gyms", "Privacy Policy", "How Animal Paradise Gyms in Vineland, NJ collects, uses and protects your personal information, and how to exercise your privacy rights.")
 legal_page("terms-of-service", "Terms of Service | Animal Paradise Gyms", "Terms of Service", "Website terms and conditions of use for animalparadisegyms.com, operated by Animal Paradise, LLC in Vineland, NJ.")
+PAGES["do-not-sell.html"] = dict(
+    title="Do Not Sell or Share My Personal Information | Animal Paradise Gyms",
+    desc="Opt out of the sale or sharing of your personal information, or make another privacy request to Animal Paradise Gyms in Vineland, NJ.",
+    slug="do-not-sell", schemas=[crumbs_ld("Do Not Sell or Share My Personal Information", "do-not-sell")],
+    body=page_hero("Your privacy choices", 'Do not sell or share <span class="gold">my information.</span>', "Use this form to opt out of the sale or sharing of your personal information, or to make another privacy request. We respond within 45 days.", "Do Not Sell or Share", ctas=False, bg="hero-floor") + f'''
+<section class="band"><div class="wrap split" style="align-items:start">
+  <div class="prose rv">
+    <span class="eyebrow">How it works</span>
+    <h2>Your request, <span class="gold">handled.</span></h2>
+    <p>Animal Paradise Gyms may share limited information with advertising partners, for example website activity used for ads. You can opt out at any time. We will not treat you differently for making a request.</p>
+    <ul class="ticks"><li>Opt out of sale or sharing for advertising</li><li>Limit the use of sensitive information</li><li>Access, correct or delete your information</li></ul>
+    <p>You can also email <a href="mailto:info@animalparadisegyms.com">info@animalparadisegyms.com</a> or call <a href="tel:+18568394536">(856) 839-4536</a>. Browsers that send a Global Privacy Control signal are treated as an opt-out of sharing for advertising. Read the full <a href="privacy-policy.html">Privacy Policy</a>.</p>
+  </div>
+  <form class="tour rv" id="privacy" data-lead data-form="privacy-request" data-inline="Thanks {{name}}. Your privacy request is in. We will confirm by email within 45 days." novalidate>
+    <span class="eyebrow">Privacy request</span>
+    <h3>Make a request</h3>
+    <div class="field"><label for="privacy-name">Your name</label><input id="privacy-name" data-name autocomplete="name"></div>
+    <div class="row2">
+      <div class="field"><label for="privacy-email">Email</label><input id="privacy-email" type="email" autocomplete="email"></div>
+      <div class="field"><label for="privacy-phone">Phone</label><input id="privacy-phone" type="tel" autocomplete="tel"></div>
+    </div>
+    <div class="field"><label for="privacy-request">Request</label><select id="privacy-request"><option>Do not sell or share my information</option><option>Limit use of my sensitive information</option><option>Send me a copy of my information</option><option>Correct my information</option><option>Delete my information</option></select></div>
+    <button class="btn btn-gold" type="submit">Send request</button>
+    <p class="fine">We only use these details to find your records and respond.</p>
+    <div class="msg" hidden></div>
+  </form>
+</div></section>''')
 WAIVER = open("waiver_text.html").read()
 PAGES["parent-consent-form.html"] = dict(
     title="Parent Consent Waiver | Animal Paradise Gyms, Vineland NJ",

@@ -58,7 +58,7 @@ Depending on where you live, you may have rights to:
 - **Limit Use of Sensitive Info**: Restrict use of sensitive personal data
 - **Appeal**: Request review if we deny a privacy request (certain states)
 
-To exercise your rights, email **info@animalparadisegyms.com**, call **856-839-4536**, or use the “Do Not Sell or Share My Personal Information” link on our Site.
+To exercise your rights, email **info@animalparadisegyms.com**, call **856-839-4536**, or use the [“Do Not Sell or Share My Personal Information”](/do-not-sell/) link on our Site.
 
 We will not discriminate against you for exercising your rights.
 

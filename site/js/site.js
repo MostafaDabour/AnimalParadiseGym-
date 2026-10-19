@@ -92,6 +92,7 @@
       btn.disabled=true;ms.textContent='Sending...';
       var body=new URLSearchParams(data);
       fetch(HOOK,{method:'POST',mode:'no-cors',body:body}).catch(function(){}).then(function(){
+        if(fm.dataset.inline){btn.disabled=false;ms.textContent=fm.dataset.inline.replace('{name}',data.first_name);fm.reset();return;}
         try{if(window.fbq)fbq('track','Lead',{content_name:data.form});}catch(_){}
         try{(window.dataLayer=window.dataLayer||[]).push({event:'generate_lead',form:data.form});}catch(_){}
         setTimeout(function(){location.href='/thank-you/'},250);
