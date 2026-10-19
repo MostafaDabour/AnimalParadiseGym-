@@ -81,7 +81,7 @@
     var nm=fm.querySelector('input[data-name]'),ms=fm.querySelector('.msg'),btn=fm.querySelector('button[type=submit]');
     fm.addEventListener('submit',function(e){
       e.preventDefault();ms.hidden=false;
-      var data={form:fm.id||'lead',page:location.pathname,source:'website'};
+      var data={form:fm.dataset.form||'free-tour',form_location:fm.id||'',page:location.pathname,source:'website'};if(fm.dataset.coach)data.coach=fm.dataset.coach;
       [].forEach.call(fm.querySelectorAll('input,select,textarea'),function(el){
         if(!el.id)return;var k=el.id.split('-').pop();data[k]=(el.value||'').trim();
       });

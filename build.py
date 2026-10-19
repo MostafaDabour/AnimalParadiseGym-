@@ -186,9 +186,9 @@ def plan_card(p):
 
 PASSES = '<div class="passes"><span>Day pass <b>$20</b></span><span>One-week pass <b>$40</b></span><span>Fit3D scan <b>$20</b></span><span>Classes <b>$15</b></span><span>Towel service <b>$10/mo</b></span><span>Daycare <b>$10/mo</b></span></div>'
 
-def tour_form(fid="tour", title="Book your free tour"):
+def tour_form(fid="tour", title="Book your free tour", kind="free-tour", coach=""):
     return f'''<!-- On GHL: replace with the GHL tour-booking form embed (same fields) so leads land in the pipeline. -->
-<form class="tour rv" id="{fid}" data-lead novalidate>
+<form class="tour rv" id="{fid}" data-lead data-form="{kind}"{f' data-coach="{coach}"' if coach else ""} novalidate>
   <span class="eyebrow">No pressure</span>
   <h3>{title}</h3>
   <p class="fine" style="font-size:15px">Fifteen minutes, no sales pitch, and a straight answer on price.</p>
@@ -302,7 +302,7 @@ PAGES["index.html"] = dict(
         <div class="hs"><b>80 ft</b><span>Training turf</span></div>
       </div>
     </div>
-    <form class="quick" id="quick" data-lead novalidate>
+    <form class="quick" id="quick" data-lead data-form="free-tour" novalidate>
       <span class="eyebrow">No pressure</span>
       <h3>Book a free tour</h3>
       <p>Fifteen minutes, no sales pitch, and a straight answer on price.</p>
@@ -635,7 +635,7 @@ PAGES["personal-training.html"] = dict(
 <section class="band faq" style="padding-top:0" id="consult">
   <div class="wrap faq-grid">
     <div class="faq-list" style="align-content:start">{faq_html(FAQ_TRAIN)}</div>
-    {tour_form("consult-form", "Book a free consultation")}
+    {tour_form("consult-form", "Book a free consultation", "pt-consultation")}
   </div>
 </section>
 {closer("Your coach", "is waiting.")}''')
@@ -1046,7 +1046,7 @@ def coach_page(c):
       <p class="lede">Sit down with {c["name"]}, talk through your goal and find out how training works and what it costs. Personal training is separate from your gym membership.</p></div>
       <ul class="ticks"><li>Goal and history review</li><li>Training options and pricing</li><li>No obligation to sign up</li></ul>
     </div>
-    {tour_form(f"book-{c['slug']}", f"Book with {c['name']}")}
+    {tour_form(f"book-{c['slug']}", f"Book with {c['name']}", "pt-consultation", c['name'])}
   </div>
 </section>
 
