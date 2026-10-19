@@ -12,11 +12,20 @@ SRC, OUT = "deploy", "dist"
 shutil.rmtree(OUT, ignore_errors=True)
 os.makedirs(OUT)
 
-TRACK_HEAD = f"""<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){{w[l]=w[l]||[];w[l].push({{'gtm.start':new Date().getTime(),event:'gtm.js'}});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);}})(window,document,'script','dataLayer','{GTM}');</script>
-<!-- Meta Pixel -->
-<script>!function(f,b,e,v,n,t,s){{if(f.fbq)return;n=f.fbq=function(){{n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)}};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','{PIXEL}');fbq('track','PageView');</script>
-<script>window.APG_WEBHOOK={json.dumps(WEBHOOK)};</script>
+TRACK_HEAD = f"""<script>
+/* Tracking loads after the page has drawn: on first interaction, or 2.5s after load, whichever comes first.
+   dataLayer and the fbq queue exist immediately, so events fired before that are kept and sent. */
+window.dataLayer=window.dataLayer||[];dataLayer.push({{'gtm.start':new Date().getTime(),event:'gtm.js'}});
+!function(f){{if(f.fbq)return;var n=f.fbq=function(){{n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)}};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[]}}(window);
+fbq('init','{PIXEL}');fbq('track','PageView');
+window.APG_WEBHOOK={json.dumps(WEBHOOK)};
+(function(){{var done=false;function go(){{if(done)return;done=true;
+  ['https://www.googletagmanager.com/gtm.js?id={GTM}','https://connect.facebook.net/en_US/fbevents.js'].forEach(function(u){{var s=document.createElement('script');s.async=true;s.src=u;document.head.appendChild(s)}});
+  ['scroll','pointerdown','keydown','touchstart'].forEach(function(e){{removeEventListener(e,go,{{passive:true}})}});}}
+  ['scroll','pointerdown','keydown','touchstart'].forEach(function(e){{addEventListener(e,go,{{passive:true,once:true}})}});
+  addEventListener('load',function(){{setTimeout(go,2500)}});
+}})();
+</script>
 """
 TRACK_BODY = f"""<noscript><iframe src="https://www.googletagmanager.com/ns.html?id={GTM}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id={PIXEL}&ev=PageView&noscript=1"></noscript>
@@ -34,7 +43,7 @@ fn2url["404.html"] = "/"  # never link to the 404 page
 
 def rewrite(html):
     html = re.sub(r'href="([a-z0-9-]+\.html)"', lambda m: f'href="{fn2url.get(m.group(1), "/")}"', html)
-    html = re.sub(r'(src|href|poster)="(img|css|js|video)/', r'\1="/\2/', html)
+    html = re.sub(r'(src|href|poster)="(img|css|js|video|fonts)/', r'\1="/\2/', html)
     html = html.replace("</title>", "</title>\n" + TRACK_HEAD, 1) if "<title>" in html else html
     html = html.replace("<body>", "<body>\n" + TRACK_BODY, 1)
     return html
@@ -53,7 +62,7 @@ for fn, (url, html) in pages.items():
     os.makedirs(os.path.dirname(path), exist_ok=True)
     open(path, "w").write(out)
 
-for d in ("css", "js", "img", "video"):
+for d in ("css", "js", "img", "video", "fonts"):
     shutil.copytree(os.path.join("site", d), os.path.join(OUT, d))
 
 # ---- image performance: mobile-size variants, srcset, intrinsic sizes ----
@@ -88,13 +97,19 @@ def img_tag(m):
         tag = tag.replace("<img ", f'<img srcset="{srcset}" sizes="{sizes}" ', 1)
     return tag
 
+def hero_preload(html):
+    m = re.search(r'<img srcset="([^"]+)" sizes="([^"]+)" width="\d+" height="\d+" data-hero', html)
+    if not m: return html
+    link = f'<link rel="preload" as="image" imagesrcset="{m.group(1)}" imagesizes="{m.group(2)}" fetchpriority="high">'
+    return html.replace("</title>", "</title>\n" + link, 1)
+
 def tune_images(html):
     # the first photo in a hero is the LCP: mark it, load it eagerly and with priority
     html = html.replace('<div class="ph hero-bg"><img ', '<div class="ph hero-bg"><img data-hero ', 1)
     return re.sub(r"<img [^>]+>", img_tag, html)
 
 for path in glob.glob(os.path.join(OUT, "**", "*.html"), recursive=True):
-    t = open(path).read(); t2 = tune_images(t)
+    t = open(path).read(); t2 = hero_preload(tune_images(t))
     if t2 != t: open(path, "w").write(t2)
 
 # cache-bust css/js so they can be cached for a year
@@ -182,6 +197,6 @@ with open(os.path.join(OUT, "llms.txt"), "w") as f:
 
 with open(os.path.join(OUT, "_headers"), "w") as f:
     f.write("/img/*\n  Cache-Control: public, max-age=31536000, immutable\n/video/*\n  Cache-Control: public, max-age=31536000, immutable\n"
-            "/css/*\n  Cache-Control: public, max-age=31536000, immutable\n/js/*\n  Cache-Control: public, max-age=31536000, immutable\n")
+            "/fonts/*\n  Cache-Control: public, max-age=31536000, immutable\n/css/*\n  Cache-Control: public, max-age=31536000, immutable\n/js/*\n  Cache-Control: public, max-age=31536000, immutable\n")
 
 print(f"dist: {len(pages)} pages, {len(sitemap)} in sitemap, {len(REDIRECTS)} redirect rules, webhook {'SET' if WEBHOOK else 'NOT SET'}")

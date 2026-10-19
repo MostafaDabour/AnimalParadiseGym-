@@ -76,9 +76,8 @@ def head(title, desc, slug, schemas, full):
 <meta property="og:url" content="{canon}">
 <meta property="og:image" content="{SITE}/img/photos/vineland-gym-hero-floor.webp">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800;900&family=Michroma&family=Figtree:wght@400;500;600;700&display=swap">
+<link rel="preload" href="fonts/unbounded-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/figtree-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/site.css">
 ''' + "\n".join(ld(s) for s in schemas)
     if full:
