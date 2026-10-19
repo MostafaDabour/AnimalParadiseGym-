@@ -27,3 +27,9 @@
 /feed /blog/ 301
 /home/ / 301
 /home / 301
+/cart/ /animal-supps/ 301
+/cart /animal-supps/ 301
+/checkout/ /animal-supps/ 301
+/checkout /animal-supps/ 301
+/my-account/ /animal-supps/ 301
+/my-account /animal-supps/ 301

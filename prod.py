@@ -72,6 +72,7 @@ REDIRECTS = [
     ("/trainer/", "/personal-training/"),
     ("/category/*", "/blog/"), ("/tag/*", "/blog/"), ("/author/*", "/blog/"), ("/feed/", "/blog/"),
     ("/home/", "/"),
+    ("/cart/", "/animal-supps/"), ("/checkout/", "/animal-supps/"), ("/my-account/", "/animal-supps/"),
 ]
 with open(os.path.join(OUT, "_redirects"), "w") as f:
     for a, b in REDIRECTS:
