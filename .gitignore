@@ -2,7 +2,7 @@ node_modules/
 raw/
 thumbs/
 deploy/
-video/
+/video/
 .wrangler/
 __pycache__/
 *.zip
