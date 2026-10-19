@@ -33,6 +33,8 @@ def head(title, desc, slug, schemas, full):
     meta = f'''<title>{title}</title>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{canon}">
+<link rel="icon" href="img/favicon-48.png" sizes="48x48" type="image/png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Animal Paradise Gyms">
 <meta property="og:title" content="{title}">

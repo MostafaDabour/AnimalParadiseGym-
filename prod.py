@@ -60,6 +60,7 @@ for fn, (url, html) in pages.items():
 
 for d in ("css", "js", "img", "video"):
     shutil.copytree(os.path.join("site", d), os.path.join(OUT, d))
+shutil.copy(os.path.join("site", "favicon.ico"), os.path.join(OUT, "favicon.ico"))
 
 # 301s from the old WordPress addresses
 REDIRECTS = [
