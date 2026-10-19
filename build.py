@@ -8,7 +8,7 @@ PLAN_IDS = dict(silver="13656dbde8fd436bb689e32c16b63056", gold="9ebe7a5348c7495
                 premium="81293d61d2af47cebc834aec823432e4", platinum="563c3fc6a6954a9ca216624c35a4378a",
                 diamond="8c6f6ea07fe0440cb83468ca56c58cdb")
 ARROW = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>'
-MAPS = "https://www.google.com/maps/search/?api=1&amp;query=Animal%20Paradise%20Gyms%2C%20Cumberland%20Mall%2C%203849%20S%20Delsea%20Dr%2C%20Vineland%2C%20NJ%2008360"
+MAPS = "https://maps.google.com/?cid=17617315884172549154"
 
 NAV = [("the-gym.html", "The Gym"), ("memberships.html", "Memberships"),
        ("personal-training.html", "Training"), ("lioness-den.html", "Lioness Den"),
@@ -283,10 +283,10 @@ GYM_LD = {
     "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "04:00", "closes": "24:00"}],
     "amenityFeature": [{"@type": "LocationFeatureSpecification", "name": n, "value": True} for n in ["Sauna", "Free parking", "Childcare", "Women's-only training area", "80-foot functional training turf", "Fit3D body composition scanner", "Posing room", "Recovery room", "Red light therapy", "Tanning beds"]],
     "founder": [{"@type": "Person", "name": "Pete"}, {"@type": "Person", "name": "Andrew"}],
-    "geo": {"@type": "GeoCoordinates", "latitude": 39.432, "longitude": -75.036},
-    "hasMap": "https://www.google.com/maps/search/?api=1&query=Animal+Paradise+Gyms+3849+S+Delsea+Dr+Vineland+NJ+08360",
+    "geo": {"@type": "GeoCoordinates", "latitude": 39.4303531, "longitude": -75.0358536},
+    "hasMap": "https://maps.google.com/?cid=17617315884172549154",
     "containedInPlace": {"@type": "ShoppingCenter", "name": "Cumberland Mall", "address": "3849 S Delsea Dr, Vineland, NJ 08360"},
-    "sameAs": ["https://www.instagram.com/animalparadisegyms", "https://www.facebook.com/profile.php?id=61560036899811", "https://apps.apple.com/us/app/animal-paradise-gym/id6745569852"],
+    "sameAs": ["https://www.instagram.com/animalparadisegyms", "https://www.facebook.com/profile.php?id=61560036899811", "https://apps.apple.com/us/app/animal-paradise-gym/id6745569852", "https://maps.google.com/?cid=17617315884172549154"],
 }
 
 ICONS = dict(
@@ -837,6 +837,10 @@ PAGES["visit.html"] = dict(
     </div>
     {tour_form()}
   </div>
+</section>
+
+<section class="band" style="padding-top:0" aria-label="Map">
+  <div class="wrap"><div class="gmap rv"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3081.724536129197!2d-75.03585360000001!3d39.4303531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c7336b5ee44827%3A0xf47d4774c3f39c22!2sAnimal%20Paradise%20Gyms%20%7C%20Modern%20Bodybuilding%20%26%20Fitness%20Facility!5e0!3m2!1sen!2sus!4v1792389366956!5m2!1sen!2sus" title="Map: Animal Paradise Gyms inside Cumberland Mall, Vineland NJ" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div></div>
 </section>
 
 <section class="band" style="padding-top:0">
