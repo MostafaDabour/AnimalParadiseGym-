@@ -77,7 +77,7 @@ def closer(h1="Come see", h2="it for yourself."):
 '''
 
 def footer(full):
-    links = "".join(f'<li><a href="{h}">{t}</a></li>' for h, t in NAV + [("gallery.html", "Gallery"), ("faq.html", "FAQ")])
+    links = "".join(f'<li><a href="{h}">{t}</a></li>' for h, t in NAV + [("gallery.html", "Gallery"), ("faq.html", "FAQ"), ("parent-consent-form.html", "Parent consent waiver")])
     end = "</body>\n</html>\n" if full else ""
     return f'''</main>
 <footer>
@@ -1464,6 +1464,23 @@ PAGES["thank-you.html"] = dict(
   {card("pin", "Find us", "3849 S Delsea Dr, Suite E000, Cumberland Mall, Vineland, NJ 08360. Free parking at the door.", "visit.html", "Hours and directions")}
   {card("users", "Meet the coaches", "Chuck, Hakim and Lauren. Personal training is booked separately from membership.", "personal-training.html", "See coaching")}
   {card("cup", "While you are here", "Animal Cafe and Animal Supps are inside the gym, open 4AM to 12AM.", "animal-cafe.html", "See the cafe")}
+</div></section>''')
+WAIVER = open("waiver_text.html").read()
+PAGES["parent-consent-form.html"] = dict(
+    title="Parent Consent Waiver | Animal Paradise Gyms, Vineland NJ",
+    desc="Parent or legal guardian consent waiver for minors training at Animal Paradise Gyms in Vineland, NJ. Read the full agreement and sign online.",
+    slug="parent-consent-form", schemas=[crumbs_ld("Parent Consent Waiver", "parent-consent-form")],
+    body=page_hero("For parents and guardians", 'Parent consent <span class="gold">waiver.</span>', "Every member under 18 needs a signed waiver from a parent or legal guardian before training. Read the agreement below, then sign it online.", "Parent Consent Waiver", ctas=False, bg="hero-floor") + f'''
+<section class="band"><div class="wrap wv-wrap">
+  <div><a class="textlink wv-skip" href="#sign">Skip to signing ↓</a>
+  <article class="wv" id="waiver" aria-label="Minor participation waiver">
+{WAIVER}
+  </article></div>
+  <div class="wv-sign" id="sign">
+    <span class="eyebrow">Sign the waiver</span>
+    <h2>Sign it <span class="gold">online.</span></h2>
+    <!--CONSENT_FORM-->
+  </div>
 </div></section>''')
 PAGES["404.html"] = dict(
     title="Page Not Found | Animal Paradise Gyms", desc="This page moved. Find memberships, coaching, the Lioness Den and more at Animal Paradise Gyms in Vineland NJ.",

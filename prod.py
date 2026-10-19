@@ -6,7 +6,8 @@ import os, re, shutil, glob, json, datetime
 SITE = "https://animalparadisegyms.com"
 GTM = "GTM-MRFZPWTB"
 PIXEL = "446714868529209"
-WEBHOOK = os.environ.get("APG_WEBHOOK", "")          # GHL inbound webhook URL for the tour forms
+WEBHOOK = os.environ.get("APG_WEBHOOK", "")
+CONSENT_FORM = os.environ.get("APG_CONSENT_FORM", "")  # GHL form embed URL for the parent consent waiver          # GHL inbound webhook URL for the tour forms
 SRC, OUT = "deploy", "dist"
 
 shutil.rmtree(OUT, ignore_errors=True)
@@ -37,18 +38,22 @@ def rewrite(html):
     html = re.sub(r'(src|href|poster)="(img|css|js|video)/', r'\1="/\2/', html)
     html = html.replace("</title>", "</title>\n" + TRACK_HEAD, 1) if "<title>" in html else html
     html = html.replace("<body>", "<body>\n" + TRACK_BODY, 1)
+    if CONSENT_FORM:
+        html = html.replace("<!--CONSENT_FORM-->", f'<iframe class="wv-frame" src="{CONSENT_FORM}" title="Parent consent waiver form" loading="lazy"></iframe><script src="https://link.msgsndr.com/js/form_embed.js" async></script>')
+    else:
+        html = html.replace("<!--CONSENT_FORM-->", '<p>Online signing is being set up. For now, a parent or guardian can sign the waiver at the front desk, any day 4AM to 12AM.</p><p><a class="btn btn-gold" href="tel:+18568394536">Call (856) 839-4536</a></p>')
     return html
 
 sitemap = []
 for fn, (url, html) in pages.items():
     out = rewrite(html)
-    if fn in ("404.html", "thank-you.html"):
+    if fn in ("404.html", "thank-you.html", "parent-consent-form.html"):
         out = out.replace("<title>", '<meta name="robots" content="noindex">\n<title>', 1)
     if fn == "404.html":
         path = os.path.join(OUT, "404.html")
     else:
         path = os.path.join(OUT, url.strip("/"), "index.html") if url != "/" else os.path.join(OUT, "index.html")
-        if fn != "thank-you.html":
+        if fn not in ("thank-you.html", "parent-consent-form.html"):
             sitemap.append(url)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     open(path, "w").write(out)
@@ -109,4 +114,5 @@ with open(os.path.join(OUT, "_headers"), "w") as f:
     f.write("/img/*\n  Cache-Control: public, max-age=31536000, immutable\n/video/*\n  Cache-Control: public, max-age=31536000, immutable\n"
             "/css/*\n  Cache-Control: public, max-age=86400\n/js/*\n  Cache-Control: public, max-age=86400\n")
 
+print(f"consent form {'SET' if CONSENT_FORM else 'NOT SET'}")
 print(f"dist: {len(pages)} pages, {len(sitemap)} in sitemap, {len(REDIRECTS)} redirect rules, webhook {'SET' if WEBHOOK else 'NOT SET'}")
