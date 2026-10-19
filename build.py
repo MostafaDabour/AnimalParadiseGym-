@@ -201,7 +201,7 @@ def tour_form(fid="tour", title="Book your free tour", kind="free-tour", coach="
     <div class="field"><label for="{fid}-time">Best time</label><select id="{fid}-time"><option>Any time</option><option>Early morning</option><option>Lunchtime</option><option>Afternoon</option><option>Evening</option><option>Late night</option></select></div>
     <div class="field"><label for="{fid}-goal">Your goal</label><select id="{fid}-goal"><option>Not sure yet</option><option>Build muscle</option><option>Lose weight</option><option>Get stronger</option><option>Compete</option><option>General fitness</option></select></div>
   </div>
-  <button class="btn btn-gold" type="submit">Book my tour</button>
+  <button class="btn btn-gold" type="submit">{"Book my free consultation" if kind.startswith("pt-") else "Book my tour"}</button>
   <p class="fine">We never share your details. No card needed.</p>
   <div class="msg" hidden></div>
 </form>'''
