@@ -838,8 +838,9 @@ CAFE_FAQ = [
 ]
 SUPPS_FAQ = [
     ("Where can I buy supplements in Vineland?", "Animal Supps is the supplement store inside Animal Paradise Gyms at Cumberland Mall, Vineland NJ, open every day from 4AM to 12AM, and online at animalsupps.co."),
-    ("What does Animal Supps carry?", "Pre-workout, protein, creatine, aminos and recovery products from top-tier brands."),
-    ("Can I order Animal Supps online?", "Yes. The same range is available online for delivery whenever you want it."),
+    ("What does Animal Supps carry?", "Over 100 brands and hundreds of products: pre-workout, protein, creatine, aminos, recovery, weight loss support, vitamins and snacks. Brands include NutraBio, Axe & Sledge, Bucked Up, Raw Nutrition, Mutant, Redcon1, Dymatize, Cellucor, Quest and Momentous."),
+    ("Are the supplements authentic?", "Yes. Animal Supps buys direct from the brands, so everything on the shelf is 100% authentic with no grey-market stock."),
+    ("Can I order Animal Supps online?", "Yes. Order at animalsupps.co for delivery, or order online and pick it up free in store at the gym."),
     ("Do members get a supplement discount?", "Yes. Gold members save 5%. Premium, Platinum and Diamond members save 10%."),
 ]
 
@@ -915,16 +916,17 @@ PAGES["animal-supps.html"] = dict(
     schemas=[crumbs_ld("Animal Supps", "animal-supps"), faq_ld(SUPPS_FAQ),
              biz_ld("Store", "Animal Supps", "Supplement store inside Animal Paradise Gyms carrying pre-workout, protein, creatine and aminos.", "animal-supps",
                     {"image": SITE + "/img/photos/vineland-gym-animal-supps.webp", "sameAs": [SUPPS_EXT]})],
-    body=page_hero("Animal Supps · Vineland, NJ", 'The supplement store <span class="gold">on the gym floor.</span>', "Pre-workout, protein, creatine and aminos from top-tier brands, picked by people who train. Open 4AM to midnight, or order online for delivery.", "Animal Supps", ctas=False, bg="animal-supps") + f'''
+    body=page_hero("Animal Supps · Vineland, NJ", 'The supplement store <span class="gold">on the gym floor.</span>', "Over 100 brands of pre-workout, protein, creatine and recovery, bought direct and picked by people who train. Open 4AM to midnight, or order online for delivery or free pickup.", "Animal Supps", ctas=False, bg="animal-supps") + f'''
 <section class="band">
   <div class="wrap">
-    {head_block("What we stock", 'Everything to <span class="gold">train and recover.</span>', "No filler brands. If our staff wouldn't take it, it's not on the shelf.")}
+    {head_block("What we stock", 'Everything to <span class="gold">train and recover.</span>', "Over 100 brands, all bought direct from the brand. If our staff wouldn't take it, it's not on the shelf.")}
     <div class="cards four">
       {card("bolt", "Pre-workout", "Energy and focus for 4AM sessions and late-night lifts.")}
       {card("plate", "Protein", "Whey, isolates and blends for every goal and budget.")}
       {card("trophy", "Creatine", "The most researched supplement for strength and size.")}
       {card("back", "Aminos and recovery", "Intra-workout and recovery support between sessions.")}
     </div>
+    <div class="chips" style="margin-top:28px;justify-content:center" aria-label="Supplement brands at Animal Supps"><span>NutraBio</span><span>Axe &amp; Sledge</span><span>Bucked Up</span><span>Raw Nutrition</span><span>Mutant</span><span>Redcon1</span><span>Dymatize</span><span>Cellucor</span><span>Quest</span><span>Momentous</span><span>and 100+ more</span></div>
   </div>
 </section>
 
@@ -935,7 +937,7 @@ PAGES["animal-supps.html"] = dict(
       <span class="eyebrow">Why buy here</span>
       <h2>Advice from people <span class="gold">who actually lift.</span></h2>
       <p>Online stores sell you what's on sale. Animal Supps staff train on the same floor you do, so they can tell you what fits your goal, your budget and your training.</p>
-      <ul class="ticks"><li>Top-tier brands, no filler</li><li>Staff who train and can advise</li><li>Open every day 4AM to 12AM</li><li>Members save up to 10%</li><li>Same range online for delivery</li></ul>
+      <ul class="ticks"><li>Over 100 brands, 100% authentic, bought direct</li><li>Staff who train and can advise</li><li>Open every day 4AM to 12AM</li><li>Members save up to 10%</li><li>Order online for delivery or free in-store pickup</li></ul>
       <p style="margin-top:8px"><a class="btn btn-gold" target="_blank" rel="noopener" href="{SUPPS_EXT}">Shop Animal Supps online {ARROW}</a></p>
     </div>
   </div>
