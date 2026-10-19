@@ -1,9 +1,17 @@
 {
   "name": "animalparadisegym",
+  "main": "worker/index.js",
   "compatibility_date": "2026-10-01",
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
     "html_handling": "auto-trailing-slash",
-    "not_found_handling": "404-page"
-  }
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/api/*"]
+  },
+  // signed parent consent waivers (signature, record, printable copy)
+  "r2_buckets": [{ "binding": "WAIVERS", "bucket_name": "apg-waivers" }],
+  // WAIVER_WEBHOOK (GHL inbound webhook) is set in the Cloudflare dashboard; keep it across deploys
+  "keep_vars": true,
+  "observability": { "enabled": true }
 }

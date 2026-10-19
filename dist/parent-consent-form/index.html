@@ -70,7 +70,7 @@
 </section>
 
 <section class="band"><div class="wrap wv-wrap">
-  <div><a class="textlink wv-skip" href="#sign">Skip to signing ↓</a>
+  <a class="textlink wv-skip" href="#sign">Skip to signing ↓</a>
   <article class="wv" id="waiver" aria-label="Minor participation waiver">
 <h2 class="wv-title">MINOR PARTICIPATION WAIVER, RELEASE OF LIABILITY, ASSUMPTION OF RISK &amp; INDEMNIFICATION AGREEMENT</h2>
 <p class="wv-warn"><strong>IMPORTANT: THIS IS A LEGALLY BINDING CONTRACT. READ CAREFULLY BEFORE SIGNING</strong></p>
@@ -102,11 +102,45 @@
 <p>This agreement is binding upon me, the Minor, and our heirs, assigns, and legal representatives. If any provision is held unenforceable, the remaining provisions shall remain in effect. This agreement is governed by New Jersey law, and any disputes shall be resolved exclusively in Cumberland County, NJ.</p>
 <h3>10. Acknowledgment of Understanding</h3>
 <p class="wv-warn">I HAVE READ THIS AGREEMENT THOROUGHLY, FULLY UNDERSTAND ITS TERMS, AND SIGN IT FREELY AND VOLUNTARILY. I UNDERSTAND I AM WAIVING SUBSTANTIAL LEGAL RIGHTS, INCLUDING THE RIGHT TO SUE THE RELEASED PARTIES FOR NEGLIGENCE OR GROSS NEGLIGENCE, TO THE MAXIMUM EXTENT PERMITTED BY LAW.</p>
-  </article></div>
-  <div class="wv-sign" id="sign">
+  </article>
+  <form class="wv-form" id="sign" novalidate>
     <span class="eyebrow">Sign the waiver</span>
     <h2>Sign it <span class="gold">online.</span></h2>
-    <p>Online signing is being set up. For now, a parent or guardian can sign the waiver at the front desk, any day 4AM to 12AM.</p><p><a class="btn btn-gold" href="tel:+18568394536">Call (856) 839-4536</a></p>
+    <p class="fine" style="font-size:15px;margin:-4px 0 6px">Takes about two minutes. All fields are required.</p>
+    <fieldset><legend>Parent or guardian</legend>
+      <div class="row2"><div class="field"><label for="w-parent_first">First name</label><input id="w-parent_first" name="parent_first" type="text" autocomplete="given-name" required></div><div class="field"><label for="w-parent_last">Last name</label><input id="w-parent_last" name="parent_last" type="text" autocomplete="family-name" required></div></div>
+      <div class="row2"><div class="field"><label for="w-parent_phone">Phone</label><input id="w-parent_phone" name="parent_phone" type="tel" autocomplete="tel" required></div><div class="field"><label for="w-parent_email">Email</label><input id="w-parent_email" name="parent_email" type="email" autocomplete="email" required></div></div>
+    </fieldset>
+    <fieldset><legend>Minor</legend>
+      <div class="row2"><div class="field"><label for="w-minor_first">First name</label><input id="w-minor_first" name="minor_first" type="text" required></div><div class="field"><label for="w-minor_last">Last name</label><input id="w-minor_last" name="minor_last" type="text" required></div></div>
+      <div class="row2"><div class="field"><label for="w-minor_dob">Date of birth</label><input id="w-minor_dob" name="minor_dob" type="date" required></div><div></div></div>
+      <div class="row2"><div class="field"><label for="w-minor_phone">Phone (type N/A if none)</label><input id="w-minor_phone" name="minor_phone" type="text" required></div><div class="field"><label for="w-minor_email">Email (type N/A if none)</label><input id="w-minor_email" name="minor_email" type="text" required></div></div>
+    </fieldset>
+    <fieldset><legend>Address</legend>
+      <div class="field"><label for="w-address1">Address line 1</label><input id="w-address1" name="address1" type="text" autocomplete="address-line1" required></div>
+      <div class="field"><label for="w-address2">Address line 2 (optional)</label><input id="w-address2" name="address2" autocomplete="address-line2"></div>
+      <div class="row3"><div class="field"><label for="w-city">City</label><input id="w-city" name="city" type="text" autocomplete="address-level2" required></div><div class="field"><label for="w-state">State</label><input id="w-state" name="state" type="text" autocomplete="address-level1" required value="NJ"></div><div class="field"><label for="w-postal">ZIP code</label><input id="w-postal" name="postal" type="text" autocomplete="postal-code" required inputmode="numeric"></div></div>
+    </fieldset>
+    <fieldset><legend>Notifications</legend>
+      <div class="row2">
+        <div class="field"><span class="lbl">Text notifications</span><div class="seg"><label><input type="radio" name="sms_ok" value="Yes" required> Yes</label><label><input type="radio" name="sms_ok" value="No"> No</label></div></div>
+        <div class="field"><span class="lbl">Email notifications</span><div class="seg"><label><input type="radio" name="email_ok" value="Yes" required> Yes</label><label><input type="radio" name="email_ok" value="No"> No</label></div></div>
+      </div>
+    </fieldset>
+    <fieldset><legend>Signature</legend>
+      <label class="agree"><input type="checkbox" name="agree" id="w-agree" required> I am the parent or legal guardian of the minor named above. I have read the full agreement above and I agree to its terms.</label>
+      <div class="sig-wrap"><canvas id="sig" aria-label="Signature pad. Sign with your finger or mouse." role="img"></canvas><span class="sig-hint">Sign here</span><button type="button" class="sig-clear" id="sig-clear">Clear</button></div>
+      <p class="fine">Signed electronically on <b id="w-today"></b>. Your signature, the agreement and the time of signing are saved together.</p>
+    </fieldset>
+    <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <button class="btn btn-gold" type="submit">Sign waiver</button>
+    <div class="msg" hidden role="status"></div>
+  </form>
+  <div class="wv-done" id="wv-done" hidden>
+    <span class="eyebrow">Waiver received</span>
+    <h2>All set. <span class="gold">See you on the floor.</span></h2>
+    <p>Your signed waiver is saved with the gym. The front desk can see it right away, so there is nothing to print or bring.</p>
+    <p><a class="btn btn-glass" href="/visit/">Hours and directions</a></p>
   </div>
 </div></section></main>
 <footer>

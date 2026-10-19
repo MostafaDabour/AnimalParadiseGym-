@@ -534,19 +534,41 @@ a.who-card{text-decoration:none}
 .hero h1{font-size:clamp(42px,6.6vw,96px)}
 .hero-sub{font-family:var(--display);font-weight:600;font-size:clamp(16px,1.6vw,21px);letter-spacing:-.01em;color:var(--ink);margin:-6px 0 18px}
 /* parent consent waiver */
-.wv-wrap{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:40px;align-items:start}
-.wv{border:1px solid var(--line);border-radius:18px;padding:clamp(20px,3vw,36px);background:rgba(242,236,223,.03);max-height:78vh;overflow:auto;font-size:15px;line-height:1.65}
+.wv-wrap{display:grid;gap:28px;max-width:900px}
+.wv{border:1px solid var(--line);border-radius:18px;padding:clamp(20px,3vw,36px);background:rgba(242,236,223,.03);max-height:62vh;overflow:auto;font-size:15px;line-height:1.65}
 .wv h2.wv-title{font-size:clamp(16px,1.6vw,20px);line-height:1.35;margin:0 0 14px}
 .wv h3{font-size:16px;margin:22px 0 6px;color:var(--gold)}
 .wv p{margin:0 0 10px;color:var(--muted)}.wv ul{margin:0 0 12px 20px;color:var(--muted)}.wv li{margin:3px 0}
-.wv .wv-warn{color:var(--text,#f2ecdf);font-weight:600}
-.wv-sign{position:sticky;top:100px}.wv-sign h2{margin:6px 0 14px}
-.wv-frame{width:100%;min-height:1400px;border:0;border-radius:14px;background:#fff}
-@media(max-width:900px){.wv-wrap{grid-template-columns:1fr}.wv{max-height:none}.wv-sign{position:static}}
-.wv-skip{display:none;margin-bottom:14px}@media(max-width:900px){.wv-skip{display:inline-block}}
+.wv .wv-warn{color:var(--ink);font-weight:600}
+.wv-skip{justify-self:start}
+.wv-form,.wv-done{border-radius:24px;padding:clamp(22px,3.4vw,44px);display:grid;gap:22px;background:linear-gradient(160deg,rgba(212,174,82,.12),var(--card) 55%);border:1px solid rgba(212,174,82,.3)}
+.wv-form h2,.wv-done h2{margin:0}
+.wv-form fieldset{border:0;padding:0;margin:0;display:grid;gap:12px}
+.wv-form legend{font:700 12px var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--gold);padding:0 0 12px;border-bottom:1px solid var(--line);width:100%;margin-bottom:4px}
+.row3{display:grid;grid-template-columns:2fr 1fr 1.2fr;gap:12px}
+@media (max-width:620px){.row3{grid-template-columns:1fr 1fr}.row3 .field:first-child{grid-column:1/-1}}
+.wv-form .lbl{font-size:13.5px;font-weight:600;color:var(--muted)}
+.seg{display:flex;gap:8px}.seg label{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);border-radius:12px;padding:13px;cursor:pointer;font-weight:600;color:var(--ink);background:rgba(242,236,223,.05);transition:border-color .2s,background .2s}
+.seg input{accent-color:var(--gold);width:18px;height:18px;margin:0}
+.seg label:has(input:checked){border-color:var(--gold);background:rgba(212,174,82,.14)}
+.agree{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.5;color:var(--ink);cursor:pointer;padding:14px;border:1px solid var(--line);border-radius:12px;background:rgba(242,236,223,.04)}
+.agree input{accent-color:var(--gold);width:20px;height:20px;flex:none;margin-top:2px}
+.sig-wrap{position:relative;border-radius:14px;background:#f2ecdf;border:2px dashed rgba(212,174,82,.6);height:190px;touch-action:none}
+.sig-wrap canvas{position:absolute;inset:0;width:100%;height:100%;border-radius:12px;cursor:crosshair;touch-action:none}
+.sig-hint{position:absolute;left:18px;bottom:16px;right:90px;border-top:1px solid rgba(20,18,15,.35);padding-top:6px;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(20,18,15,.5);pointer-events:none}
+.sig-wrap.signed .sig-hint{color:transparent}
+.sig-clear{position:absolute;right:10px;top:10px;font:600 13px var(--body);color:#14120f;background:rgba(20,18,15,.08);border:0;border-radius:999px;padding:7px 14px;cursor:pointer}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.wv-form .bad input:not([type=radio]):not([type=checkbox]),.wv-form .bad .seg label{border-color:#e07a5f}
+.agree.bad,.sig-wrap.bad{border-color:#e07a5f}
+.msg.err{border-left-color:#e07a5f;background:rgba(224,122,95,.1)}
+.wv-form button[type=submit]{justify-self:start;min-width:220px}
+@media (max-width:620px){.wv-form button[type=submit]{justify-self:stretch}}
+.wv-done p{margin:0;color:var(--muted)}
 /* legal pages */
 .legal-doc{max-width:860px}.legal-doc h2{margin-top:34px}
 .legal-tbl{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:12px}
 .legal-tbl table{border-collapse:collapse;min-width:820px;font-size:13.5px}
 .legal-tbl th,.legal-tbl td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
 .legal a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.wv-done,#sign{scroll-margin-top:110px}

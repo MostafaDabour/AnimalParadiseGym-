@@ -146,3 +146,60 @@
   var x0=null;lb.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
   lb.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)step(dx<0?1:-1);x0=null});
 })();
+
+// parent consent waiver: signature pad + submit to /api/waiver
+(function(){
+  var fm=document.getElementById('sign'),cv=document.getElementById('sig'); if(!fm||!cv) return;
+  var ctx=cv.getContext('2d'),drawn=false,down=false,last=null,wrap=cv.parentNode;
+  try{document.getElementById('w-today').textContent=new Date().toLocaleDateString('en-US',{dateStyle:'long'});}catch(e){}
+  function size(){
+    var keep=drawn?cv.toDataURL():null,r=cv.getBoundingClientRect(),d=Math.max(window.devicePixelRatio||1,1);
+    cv.width=Math.round(r.width*d);cv.height=Math.round(r.height*d);
+    ctx.setTransform(d,0,0,d,0,0);ctx.lineWidth=2.4;ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle='#14120f';
+    if(keep){var im=new Image();im.onload=function(){ctx.drawImage(im,0,0,r.width,r.height)};im.src=keep;}
+  }
+  size(); var rw=cv.getBoundingClientRect().width;
+  window.addEventListener('resize',function(){var w=cv.getBoundingClientRect().width;if(Math.abs(w-rw)>2){rw=w;size();}});
+  function pt(e){var r=cv.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}}
+  cv.addEventListener('pointerdown',function(e){e.preventDefault();down=true;last=pt(e);cv.setPointerCapture(e.pointerId);ctx.beginPath();ctx.arc(last.x,last.y,1.1,0,6.3);ctx.fillStyle='#14120f';ctx.fill();mark();});
+  cv.addEventListener('pointermove',function(e){if(!down)return;e.preventDefault();var p=pt(e);ctx.beginPath();ctx.moveTo(last.x,last.y);ctx.lineTo(p.x,p.y);ctx.stroke();last=p;mark();});
+  ['pointerup','pointercancel','pointerleave'].forEach(function(t){cv.addEventListener(t,function(){down=false})});
+  function mark(){if(!drawn){drawn=true;wrap.classList.add('signed');wrap.classList.remove('bad');}}
+  document.getElementById('sig-clear').addEventListener('click',function(){ctx.clearRect(0,0,cv.width,cv.height);drawn=false;wrap.classList.remove('signed');});
+
+  var ms=fm.querySelector('.msg'),btn=fm.querySelector('button[type=submit]');
+  function err(t,first){ms.hidden=false;ms.classList.add('err');ms.textContent=t;if(first){first.scrollIntoView({behavior:'smooth',block:'center'});if(first.focus)first.focus({preventScroll:true});}}
+  fm.addEventListener('input',function(e){var f=e.target.closest('.field,.agree');if(f)f.classList.remove('bad')});
+  fm.addEventListener('submit',function(e){
+    e.preventDefault();
+    [].forEach.call(fm.querySelectorAll('.bad'),function(x){x.classList.remove('bad')});
+    var data={},bad=[];
+    [].forEach.call(fm.elements,function(el){
+      if(!el.name)return;
+      if(el.type==='radio'){if(el.checked)data[el.name]=el.value;return;}
+      if(el.type==='checkbox'){data[el.name]=el.checked;return;}
+      data[el.name]=(el.value||'').trim();
+    });
+    [].forEach.call(fm.querySelectorAll('[required]'),function(el){
+      var ok=el.type==='radio'?!!data[el.name]:el.type==='checkbox'?el.checked:!!data[el.name];
+      if(el.type==='email'&&ok)ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data[el.name]);
+      if(!ok){var f=el.closest('.field,.agree');if(f&&bad.indexOf(f)<0){f.classList.add('bad');bad.push(f);}}
+    });
+    if(!drawn){wrap.classList.add('bad');bad.push(wrap);}
+    if(bad.length){err(bad.length===1&&bad[0]===wrap?'Please sign in the signature box.':'Please complete the highlighted fields.',bad[0].querySelector('input')||bad[0]);return;}
+    data.signature=cv.toDataURL('image/png');
+    btn.disabled=true;btn.textContent='Saving your waiver...';ms.hidden=true;ms.classList.remove('err');
+    fetch('/api/waiver',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(data)})
+      .then(function(r){return r.json().catch(function(){return{ok:false}})})
+      .then(function(res){
+        if(!res.ok){btn.disabled=false;btn.textContent='Sign waiver';
+          var first=null;(res.missing||[]).forEach(function(k){var el=fm.querySelector('[name="'+k+'"]');var f=k==='signature'?wrap:el&&el.closest('.field,.agree');if(f){f.classList.add('bad');first=first||f;}});
+          err(res.error||'Something went wrong. Please try again or call (856) 839-4536.',first);return;}
+        try{(window.dataLayer=window.dataLayer||[]).push({event:'waiver_signed'});}catch(_){}
+        var done=document.getElementById('wv-done');fm.hidden=true;document.getElementById('waiver').hidden=true;
+        var sk=document.querySelector('.wv-skip');if(sk)sk.hidden=true;done.hidden=false;
+        done.scrollIntoView({behavior:'smooth',block:'start'});
+      })
+      .catch(function(){btn.disabled=false;btn.textContent='Sign waiver';err('No connection. Please check your internet and try again.');});
+  });
+})();
