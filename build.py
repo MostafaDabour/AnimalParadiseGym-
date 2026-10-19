@@ -1046,7 +1046,7 @@ def coach_page(c):
       <p class="lede">Sit down with {c["name"]}, talk through your goal and find out how training works and what it costs. Personal training is separate from your gym membership.</p></div>
       <ul class="ticks"><li>Goal and history review</li><li>Training options and pricing</li><li>No obligation to sign up</li></ul>
     </div>
-    {tour_form(f"book-{c['slug']}", f"Book with {c['name']}", "pt-consultation", c['name'])}
+    {tour_form(f"book-{c['slug']}", f"Book with {c['name']}", f"pt-consultation-{c['slug']}", c['name'])}
   </div>
 </section>
 
