@@ -204,3 +204,77 @@
       .catch(function(){btn.disabled=false;btn.textContent='Sign waiver';err('No connection. Please check your internet and try again.');});
   });
 })();
+
+// Black Friday ads funnel: qualify, route to $1 membership or Chuck's free session, send to GHL, then the matching booking page
+(function(){
+  var fm=document.querySelector('form[data-bf]'); if(!fm) return;
+  var steps=[].slice.call(fm.querySelectorAll('.qstep')),bar=document.getElementById('qbar'),back=document.getElementById('qback');
+  var ans={},i=0,HOOK=(window.APG_WEBHOOK||'');
+  var qs=new URLSearchParams(location.search),track={};
+  ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','gclid'].forEach(function(k){if(qs.get(k))track[k]=qs.get(k)});
+  function route(){return (ans.coach==='yes'||ans.goal==='compete')?'pt':'bf'}
+  function show(n){
+    i=n;steps.forEach(function(s,k){s.hidden=k!==n});
+    bar.style.width=Math.round((n)/(steps.length-1)*100)+'%';
+    back.hidden=n===0;
+    var num=steps[n].querySelector('.qnum'); if(num) num.textContent=(n<steps.length-1?('Question '+(n+1)+' of '+(steps.length-1)):'Last step');
+    if(steps[n].dataset.q==='contact'){
+      var pt=route()==='pt';
+      document.getElementById('q-result').textContent=pt?'Great fit for a free session with Chuck.':'You qualify for the $1 first month.';
+      document.getElementById('q-result-sub').textContent=pt?'Your first personal training session is free. Where should we reach you to book it?':'Plus a free Fit3D body scan. Where should we send it? Our team will call you to lock it in.';
+      document.getElementById('bf-submit').textContent=pt?'Book my free session':'Claim my $1 month';
+      setTimeout(function(){var f=document.getElementById('bf-first');if(f)f.focus({preventScroll:true})},50);
+    }
+  }
+  fm.addEventListener('click',function(e){
+    var b=e.target.closest('.qopt'); if(!b) return;
+    var st=b.closest('.qstep'); ans[st.dataset.q]=b.dataset.v;
+    [].forEach.call(st.querySelectorAll('.qopt'),function(x){x.classList.toggle('on',x===b)});
+    try{(window.dataLayer=window.dataLayer||[]).push({event:'bf_quiz_step',step:st.dataset.q,answer:b.dataset.v})}catch(_){}
+    setTimeout(function(){show(i+1);fm.scrollIntoView({behavior:'smooth',block:'start'})},180);
+  });
+  back.addEventListener('click',function(){if(i>0)show(i-1)});
+  show(0);
+
+  // countdown to Nov 30, 11:59 PM Eastern
+  var end=new Date('2026-11-30T23:59:59-05:00').getTime(),cd=document.getElementById('lp-count');
+  function tick(){var t=Math.max(0,end-Date.now()),d=Math.floor(t/864e5),h=Math.floor(t%864e5/36e5),m=Math.floor(t%36e5/6e4);
+    if(!cd)return;cd.querySelector('[data-u=d]').textContent=d;cd.querySelector('[data-u=h]').textContent=h;cd.querySelector('[data-u=m]').textContent=m;
+    if(t<=0)cd.innerHTML='<span>This offer has ended</span>';}
+  tick();setInterval(tick,30000);
+
+  var ms=fm.querySelector('.msg'),btn=document.getElementById('bf-submit');
+  fm.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(fm.website&&fm.website.value)return;
+    var d={first_name:fm.first_name.value.trim(),last_name:fm.last_name.value.trim(),phone:fm.phone.value.trim(),email:fm.email.value.trim()};
+    var bad=null;
+    if(!d.first_name)bad=fm.first_name;else if(!d.last_name)bad=fm.last_name;
+    else if(d.phone.replace(/\D/g,'').length<10)bad=fm.phone;
+    else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email))bad=fm.email;
+    if(bad){ms.hidden=false;ms.textContent='Please check your '+(bad.previousElementSibling?bad.previousElementSibling.textContent.toLowerCase():'details')+'.';bad.focus();return;}
+    var r=route(),form=r==='pt'?'pt-chuck-offer':'bf-membership';
+    var temp=ans.start==='week'?'hot':ans.start==='month'?'warm':'cold';
+    var data=Object.assign({form:form,offer:r==='pt'?'Free personal training session with Chuck':'Black Friday $1 first month + free body scan',
+      name:d.first_name+' '+d.last_name,goal:ans.goal||'',experience:ans.experience||'',wants_coach:ans.coach||'',start:ans.start||'',lead_temp:temp,
+      page:location.pathname,source:track.utm_source||'ads'},d,track);
+    btn.disabled=true;btn.textContent='Sending...';ms.hidden=true;
+    try{sessionStorage.setItem('apg_lead',JSON.stringify({first_name:d.first_name,last_name:d.last_name,email:d.email,phone:d.phone}))}catch(_){}
+    var go=function(){location.href=r==='pt'?'/black-friday/coaching/':'/black-friday/membership/'};
+    if(!HOOK){ms.hidden=false;ms.textContent='Preview: form not connected.';btn.disabled=false;return;}
+    fetch(HOOK,{method:'POST',mode:'no-cors',body:new URLSearchParams(data)}).catch(function(){}).then(function(){
+      try{if(window.fbq)fbq('track','Lead',{content_name:form,content_category:temp});}catch(_){}
+      try{(window.dataLayer=window.dataLayer||[]).push({event:'generate_lead',form:form,lead_temp:temp});}catch(_){}
+      setTimeout(go,300);
+    });
+  });
+})();
+
+// Black Friday thank-you pages: load the booking calendar prefilled with the lead's details
+(function(){
+  var f=document.getElementById('lp-cal'); if(!f) return;
+  var u=f.dataset.src,p={};
+  try{p=JSON.parse(sessionStorage.getItem('apg_lead')||'{}')}catch(_){}
+  var q=new URLSearchParams();['first_name','last_name','email','phone'].forEach(function(k){if(p[k])q.set(k,p[k])});
+  f.src=u+(q.toString()?'?'+q.toString():'');
+})();

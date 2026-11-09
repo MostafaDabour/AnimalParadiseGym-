@@ -1610,9 +1610,123 @@ PAGES["404.html"] = dict(
   {card("pin", "Visit us", "Open every day 4AM to 12AM inside Cumberland Mall.", "visit.html", "Hours and directions")}
 </div></section>''')
 
+# ---------- ads landing pages (not linked, noindex) ----------
+BARE_NAV = """<header class="lp-top"><div class="wrap">
+  <img src="img/logo.png" alt="Animal Paradise Gyms" width="157" height="46">
+  <a class="btn btn-glass lp-call" href="tel:+18568394536">Call (856) 839-4536</a>
+</div></header>
+<main>
+"""
+BARE_FOOT = """</main>
+<footer class="lp-foot"><div class="wrap">
+  <p>Animal Paradise Gyms · Cumberland Mall, 3849 S Delsea Dr, Suite E000, Vineland, NJ 08360 · Open every day 4AM to 12AM</p>
+  <p><a href="privacy-policy.html">Privacy Policy</a> · <a href="terms-of-service.html">Terms of Service</a></p>
+</div></footer>
+<script src="js/site.js"></script>
+</body>
+</html>
+"""
+BF_TERMS = "New members only. 12-month membership agreement required. First month $1, then your plan's regular monthly rate. One free Fit3D body scan per new member. Offer valid November 1 to 30, 2026. Personal training is a separate service from membership."
+
+def q(name, title, sub, opts):
+    o = "".join(f'<button type="button" class="qopt" data-v="{v}"><b>{t}</b>{f"<small>{d}</small>" if d else ""}</button>' for v, t, d in opts)
+    return f'<fieldset class="qstep" data-q="{name}" hidden><legend><span class="qnum"></span>{title}</legend><p class="qsub">{sub}</p><div class="qopts">{o}</div></fieldset>'
+
+PAGES["black-friday.html"] = dict(
+    bare=True,
+    title="Black Friday: First Month $1 | Animal Paradise Gyms",
+    desc="Black Friday all November at Animal Paradise Gyms in Vineland, NJ. Your first month is $1 plus a free Fit3D body scan. New members, 12-month agreement.",
+    slug="black-friday", schemas=[],
+    body=f"""
+<section class="lp-hero">
+  <div class="ph hero-bg"><img src="img/photos/vineland-gym-hero-floor.webp" alt="Training floor at Animal Paradise Gyms in Vineland NJ"></div>
+  <div class="wrap lp-hero-in">
+    <div class="lp-copy">
+      <span class="lp-badge">Black Friday · All November</span>
+      <h1>Your first month<br><span class="gold">for $1.</span></h1>
+      <p class="lp-plus">Plus a <b>free Fit3D body scan</b> so you know exactly where you are starting.</p>
+      <ul class="ticks lp-ticks"><li>Open every day 4AM to 12AM</li><li>Serious equipment, beginners welcome</li><li>Sauna with every plan, women-only Lioness Den</li></ul>
+      <div class="lp-count" id="lp-count" aria-live="polite"><span>Offer ends in</span><b data-u="d">--</b>d <b data-u="h">--</b>h <b data-u="m">--</b>m</div>
+      <a class="btn btn-gold lp-go" href="#claim">Claim my $1 month <span aria-hidden="true">→</span></a>
+      <p class="lp-fine">New members only. 12-month agreement required.</p>
+    </div>
+
+    <form class="lp-quiz" id="claim" novalidate data-bf>
+      <div class="qbar"><span id="qbar"></span></div>
+      <div class="qhead"><span class="eyebrow">Takes 30 seconds</span><h2>See what you qualify for</h2></div>
+      {q("goal", "What is your main goal?", "Pick the closest one.", [("start","Get started or back in shape",""),("lose","Lose weight and feel better",""),("muscle","Build muscle and strength",""),("compete","Compete on stage","NPC, bodybuilding, bikini, physique")])}
+      {q("experience", "How much gym experience do you have?", "No wrong answers. Everyone starts somewhere.", [("new","Brand new",""),("some","Some, on and off",""),("years","Years of training","")])}
+      {q("coach", "Do you want a coach to plan your training?", "Personal training is separate from membership. Your first session with Chuck is free.", [("yes","Yes, I want a coach","Free first session with Chuck"),("no","No, I will train on my own","Just the membership")])}
+      {q("start", "When do you want to start?", "The $1 first month runs until November 30.", [("week","This week",""),("month","This month",""),("looking","Just looking for now","")])}
+      <fieldset class="qstep" data-q="contact" hidden>
+        <legend><span class="qnum"></span><span id="q-result">You qualify for the $1 first month.</span></legend>
+        <p class="qsub" id="q-result-sub">Where should we send your offer? Our team will call you to lock it in.</p>
+        <div class="row2">
+          <div class="field"><label for="bf-first">First name</label><input id="bf-first" name="first_name" autocomplete="given-name" required></div>
+          <div class="field"><label for="bf-last">Last name</label><input id="bf-last" name="last_name" autocomplete="family-name" required></div>
+        </div>
+        <div class="field"><label for="bf-phone">Mobile number</label><input id="bf-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required></div>
+        <div class="field"><label for="bf-email">Email</label><input id="bf-email" name="email" type="email" autocomplete="email" required></div>
+        <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn btn-gold" type="submit" id="bf-submit">Claim my offer</button>
+        <p class="lp-consent">By submitting, you agree that Animal Paradise Gyms may call and text you about this offer and your membership, including by automated means. Consent is not a condition of purchase. Msg and data rates may apply. Reply STOP to opt out. See our <a href="privacy-policy.html">Privacy Policy</a>.</p>
+        <div class="msg" hidden role="status"></div>
+      </fieldset>
+      <button type="button" class="qback" id="qback" hidden>← Back</button>
+    </form>
+  </div>
+</section>
+
+<section class="band lp-why">
+  <div class="wrap">
+    <div class="lp-grid">
+      {card("plate", "Serious equipment", "Arsenal, Atlantis, Rogue and Booty Builder, plus an 80-foot turf. Never wait for a rack.")}
+      {card("bolt", "Open 20 hours a day", "4AM to 12AM, seven days a week. Before work, after work, whenever works.")}
+      {card("user", "Beginners welcome", "No judgment and no pressure. Our team shows you around on day one.")}
+      {card("scan", "Free Fit3D body scan", "A full 3D body composition scan so you can track real progress, not just the scale.")}
+    </div>
+    <p class="lp-terms">{BF_TERMS}</p>
+  </div>
+</section>
+""")
+
+def bf_thanks(fn, slug, offer, h1, lede, cal, extra):
+    PAGES[fn] = dict(bare=True, title=f"{offer} | Animal Paradise Gyms", desc=f"Thanks for claiming the {offer} offer at Animal Paradise Gyms in Vineland, NJ.",
+        slug=slug, schemas=[], body=f"""
+<section class="band lp-thanks"><div class="wrap">
+  <span class="lp-badge">You are in</span>
+  <h1>{h1}</h1>
+  <p class="lp-plus">{lede}</p>
+  <div class="lp-steps">
+    <div><b>1</b><span>Our team calls or texts you shortly from (856) 839-4536.</span></div>
+    <div><b>2</b><span>Want to skip the wait? Pick a time below.</span></div>
+    <div><b>3</b><span>Come in, see the gym and get started.</span></div>
+  </div>
+  <div class="lp-cal"><iframe id="lp-cal" data-src="{cal}" title="Book a time at Animal Paradise Gyms" scrolling="no"></iframe></div>
+  {extra}
+  <p class="lp-terms">{BF_TERMS}</p>
+</div></section>
+<script src="https://link.msgsndr.com/js/form_embed.js" async></script>
+""")
+
+bf_thanks("black-friday-membership.html", "black-friday/membership", "Black Friday $1 First Month",
+    'Your $1 month is <span class="gold">reserved.</span>',
+    "Pick a time to come in for your tour. We will set up your membership and your free Fit3D body scan on the same visit.",
+    "https://api.leadconnectorhq.com/widget/bookings/animal-paradise-gym-tour", "")
+bf_thanks("black-friday-coaching.html", "black-friday/coaching", "Free Session With Chuck",
+    'Your free session with <span class="gold">Chuck.</span>',
+    "Pick a time for your free personal training session. Chuck will look at your goals and map out your first steps.",
+    "https://api.leadconnectorhq.com/widget/bookings/free-personal-training-session-5oipa",
+    '<p class="lp-note">Not a member yet? The Black Friday $1 first month and free body scan run until November 30. Ask about it at your session. Personal training is booked separately from membership.</p>')
+
 # ---------- write ----------
 for fn, p in PAGES.items():
     full = fn != "index.html"
+    if p.get("bare"):
+        html = head(p["title"], p["desc"], p["slug"], p["schemas"], True) + BARE_NAV + p["body"] + BARE_FOOT
+        html = html.replace("<body>", '<body class="lp">', 1)
+        open(os.path.join(OUT, fn), "w").write(html); os.makedirs("deploy", exist_ok=True)
+        open(os.path.join("deploy", fn), "w").write(html); continue
     html = head(p["title"], p["desc"], p["slug"], p["schemas"], full) + nav(p.get("nav_active", fn)) + p["body"] + footer(full)
     html = re.sub(r'href="([a-z0-9-]+\.html)#[^"]*"', r'href="\1"', html)
     open(os.path.join(OUT, fn), "w").write(html)

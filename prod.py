@@ -51,13 +51,13 @@ def rewrite(html):
 sitemap = []
 for fn, (url, html) in pages.items():
     out = rewrite(html)
-    if fn in ("404.html", "thank-you.html", "parent-consent-form.html"):
+    if fn in ("404.html", "thank-you.html", "parent-consent-form.html") or fn.startswith("black-friday"):
         out = out.replace("<title>", '<meta name="robots" content="noindex">\n<title>', 1)
     if fn == "404.html":
         path = os.path.join(OUT, "404.html")
     else:
         path = os.path.join(OUT, url.strip("/"), "index.html") if url != "/" else os.path.join(OUT, "index.html")
-        if fn not in ("thank-you.html", "parent-consent-form.html"):
+        if fn not in ("thank-you.html", "parent-consent-form.html") and not fn.startswith("black-friday"):
             sitemap.append(url)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     open(path, "w").write(out)
