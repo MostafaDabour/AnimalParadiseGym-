@@ -257,7 +257,7 @@
     var temp=ans.start==='week'?'hot':ans.start==='month'?'warm':'cold';
     var data=Object.assign({form:form,offer:r==='pt'?'Free personal training session with Chuck':'Black Friday $1 first month + free body scan',
       name:d.first_name+' '+d.last_name,goal:ans.goal||'',experience:ans.experience||'',wants_coach:ans.coach||'',start:ans.start||'',lead_temp:temp,
-      page:location.pathname,source:track.utm_source||'ads'},d,track);
+      page:location.pathname,angle:window.APG_ANGLE||'default',source:track.utm_source||'ads'},d,track);
     btn.disabled=true;btn.textContent='Sending...';ms.hidden=true;
     try{sessionStorage.setItem('apg_lead',JSON.stringify({first_name:d.first_name,last_name:d.last_name,email:d.email,phone:d.phone}))}catch(_){}
     var go=function(){location.href=r==='pt'?'/black-friday/coaching/':'/black-friday/membership/'};
@@ -277,4 +277,13 @@
   try{p=JSON.parse(sessionStorage.getItem('apg_lead')||'{}')}catch(_){}
   var q=new URLSearchParams();['first_name','last_name','email','phone'].forEach(function(k){if(p[k])q.set(k,p[k])});
   f.src=u+(q.toString()?'?'+q.toString():'');
+})();
+
+// Black Friday: sticky mobile CTA hides while the quiz is on screen; angle passed to GHL
+(function(){
+  var st=document.getElementById('lp-sticky'),qz=document.getElementById('claim'); if(!st||!qz) return;
+  st.hidden=false; var inView=true, past=false;
+  if('IntersectionObserver' in window){new IntersectionObserver(function(es){inView=es[0].isIntersecting;upd()},{threshold:.15}).observe(qz);}
+  function upd(){past=window.scrollY>500;st.classList.toggle('show',past&&!inView)}
+  addEventListener('scroll',upd,{passive:true});upd();
 })();

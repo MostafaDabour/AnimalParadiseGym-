@@ -34,7 +34,7 @@ window.APG_WEBHOOK="https://services.leadconnectorhq.com/hooks/31VwWnIDdjlwKYy4I
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="/fonts/unbounded-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/figtree-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/site.css?v=c9532bcb">
+<link rel="stylesheet" href="/css/site.css?v=d4bd5a17">
 
 </head>
 <body class="lp">
@@ -49,8 +49,24 @@ window.APG_WEBHOOK="https://services.leadconnectorhq.com/hooks/31VwWnIDdjlwKYy4I
   <div class="wrap lp-hero-in">
     <div class="lp-copy">
       <span class="lp-badge">Black Friday · All November</span>
-      <h1>Your first month<br><span class="gold">for $1.</span></h1>
-      <p class="lp-plus">Plus a <b>free Fit3D body scan</b> so you know exactly where you are starting.</p>
+      <p class="lp-kicker" id="lp-kicker" hidden></p>
+      <h1 id="lp-h1">Your first month<br><span class="gold">for $1.</span></h1>
+      <p class="lp-plus" id="lp-plus">Plus a <b>free Fit3D body scan</b> so you know exactly where you are starting.</p>
+      <script>
+      (function(){var q=new URLSearchParams(location.search),a=(q.get('angle')||'').toLowerCase(),c=(q.get('utm_content')||'').toLowerCase();
+        if(!a){if(/lioness|women|ladies/.test(c))a='women';else if(/mom/.test(c))a='moms';else if(/schedule|hours|late|early/.test(c))a='schedule';else if(/beginner|start|january|bodybuilder/.test(c))a='beginner';else if(/serious|lifter|holding|compet/.test(c))a='lifter';else if(/more|amenit|cafe|sauna/.test(c))a='more';}
+        var A={
+          women:['Ladies of Vineland','Your own space<br>to train. <span class="gold">$1.</span>','The women-only <b>Lioness Den</b>, plus your first month for $1 and a free Fit3D body scan.','lioness-den'],
+          moms:['For the moms','Time for you.<br><span class="gold">First month $1.</span>','A place to focus on your strength and your goals. Childcare available, plus a free Fit3D body scan.','daycare'],
+          schedule:['Open 4AM to 12AM, every day','A gym that fits<br><span class="gold">your schedule.</span>','Before work, after work, whenever works. Your first month is $1, plus a free Fit3D body scan.','cardio-floor'],
+          beginner:['Beginners welcome','You don\'t need to be<br>in shape to <span class="gold">start.</span>','Come in, learn the gym at your own pace. Your first month is $1, plus a free Fit3D body scan.','hero-floor'],
+          lifter:['Built for people who train','Train somewhere<br><span class="gold">serious. $1.</span>','Arsenal, Atlantis, Rogue and an 80-foot turf. Your first month is $1, plus a free Fit3D body scan.','squat-racks'],
+          more:['More than a gym','Train. Recover.<br><span class="gold">Refuel. $1.</span>','Sauna, recovery room, cafe and supplement store under one roof. First month $1, plus a free Fit3D body scan.','hibernation-station']};
+        var v=A[a];if(!v)return;window.APG_ANGLE=a;
+        var k=document.getElementById('lp-kicker');k.textContent=v[0];k.hidden=false;
+        document.getElementById('lp-h1').innerHTML=v[1];document.getElementById('lp-plus').innerHTML=v[2];
+        var im=document.querySelector('.lp-hero .hero-bg img');if(im&&v[3]&&v[3]!=='hero-floor'){var b='/img/photos/vineland-gym-'+v[3];im.removeAttribute('srcset');im.src=b+(innerWidth<900?'-760':'-1200')+'.webp';im.onerror=function(){im.onerror=null;im.src=b+'.webp'};}})();
+      </script>
       <ul class="ticks lp-ticks"><li>Open every day 4AM to 12AM</li><li>Serious equipment, beginners welcome</li><li>Sauna with every plan, women-only Lioness Den</li></ul>
       <div class="lp-count" id="lp-count" aria-live="polite"><span>Offer ends in</span><b data-u="d">--</b>d <b data-u="h">--</b>h <b data-u="m">--</b>m</div>
       <a class="btn btn-gold lp-go" href="#claim">Claim my $1 month <span aria-hidden="true">→</span></a>
@@ -83,6 +99,15 @@ window.APG_WEBHOOK="https://services.leadconnectorhq.com/hooks/31VwWnIDdjlwKYy4I
   </div>
 </section>
 
+<section class="band lp-proof">
+  <div class="wrap">
+    <div class="lp-rating"><b>4.6</b><span class="stars">★★★★★</span><span>from 229 Google reviews</span></div>
+    <div class="rv-grid"><figure class="rv-card"><div class="stars" aria-label="5 stars">★★★★★</div><blockquote>“Animal Paradise is on a different level. The equipment is easily the best in the area, nothing compares, and the staff is super friendly and always ready to help. Everyone is there to work, push themselves, and support each other.”</blockquote><figcaption>Google review</figcaption></figure><figure class="rv-card"><div class="stars" aria-label="5 stars">★★★★★</div><blockquote>“Excellent gym for me and my wife. All the machines you could want. Huge space. Great locker rooms and restrooms. It’s worth the money. Staff is great.”</blockquote><figcaption>Google review</figcaption></figure><figure class="rv-card"><div class="stars" aria-label="5 stars">★★★★★</div><blockquote>“For a gym that even takes women into account the Lioness Den full of privacy only accessible to women is a must.”</blockquote><figcaption>Google review</figcaption></figure></div>
+    <p class="lp-src"><a href="https://maps.google.com/?cid=17617315884172549154" target="_blank" rel="noopener">Read all reviews on Google →</a></p>
+  </div>
+  <div class="lp-strip" aria-label="Inside Animal Paradise Gyms"><img srcset="/img/photos/vineland-gym-hero-floor-760.webp 760w, /img/photos/vineland-gym-hero-floor-1200.webp 1200w, /img/photos/vineland-gym-hero-floor.webp 1680w" sizes="(max-width: 900px) 100vw, 50vw" width="1680" height="1122" src="/img/photos/vineland-gym-hero-floor.webp" alt="Hero Floor at Animal Paradise Gyms, Vineland NJ" loading="lazy" decoding="async"><img srcset="/img/photos/vineland-gym-squat-racks-760.webp 760w, /img/photos/vineland-gym-squat-racks.webp 1400w" sizes="(max-width: 900px) 100vw, 50vw" width="1400" height="935" src="/img/photos/vineland-gym-squat-racks.webp" alt="Squat Racks at Animal Paradise Gyms, Vineland NJ" loading="lazy" decoding="async"><img srcset="/img/photos/vineland-gym-lioness-den-760.webp 760w, /img/photos/vineland-gym-lioness-den-1200.webp 1200w, /img/photos/vineland-gym-lioness-den.webp 1600w" sizes="(max-width: 900px) 100vw, 50vw" width="1600" height="1069" src="/img/photos/vineland-gym-lioness-den.webp" alt="Lioness Den at Animal Paradise Gyms, Vineland NJ" loading="lazy" decoding="async"><img srcset="/img/photos/vineland-gym-hibernation-station-760.webp 760w, /img/photos/vineland-gym-hibernation-station.webp 1400w" sizes="(max-width: 900px) 100vw, 50vw" width="1400" height="935" src="/img/photos/vineland-gym-hibernation-station.webp" alt="Hibernation Station at Animal Paradise Gyms, Vineland NJ" loading="lazy" decoding="async"><img srcset="/img/photos/vineland-gym-animal-cafe-760.webp 760w, /img/photos/vineland-gym-animal-cafe-1200.webp 1200w, /img/photos/vineland-gym-animal-cafe.webp 1600w" sizes="(max-width: 900px) 100vw, 50vw" width="1600" height="1069" src="/img/photos/vineland-gym-animal-cafe.webp" alt="Animal Cafe at Animal Paradise Gyms, Vineland NJ" loading="lazy" decoding="async"><img width="900" height="1347" src="/img/photos/vineland-gym-biggest-dumbbells.webp" alt="Biggest Dumbbells at Animal Paradise Gyms, Vineland NJ" loading="lazy" decoding="async"><img srcset="/img/photos/vineland-gym-cardio-floor-760.webp 760w, /img/photos/vineland-gym-cardio-floor.webp 1400w" sizes="(max-width: 900px) 100vw, 50vw" width="1400" height="935" src="/img/photos/vineland-gym-cardio-floor.webp" alt="Cardio Floor at Animal Paradise Gyms, Vineland NJ" loading="lazy" decoding="async"><img width="800" height="1198" src="/img/photos/vineland-gym-red-light-recovery.webp" alt="Red Light Recovery at Animal Paradise Gyms, Vineland NJ" loading="lazy" decoding="async"></div>
+</section>
+
 <section class="band lp-why">
   <div class="wrap">
     <div class="lp-grid">
@@ -94,11 +119,12 @@ window.APG_WEBHOOK="https://services.leadconnectorhq.com/hooks/31VwWnIDdjlwKYy4I
     <p class="lp-terms">New members only. 12-month membership agreement required. First month $1, then your plan's regular monthly rate. One free Fit3D body scan per new member. Offer valid November 1 to 30, 2026. Personal training is a separate service from membership.</p>
   </div>
 </section>
+<a class="lp-sticky" id="lp-sticky" href="#claim" hidden><span>Black Friday · All November</span><b>Claim my $1 month →</b></a>
 </main>
 <footer class="lp-foot"><div class="wrap">
   <p>Animal Paradise Gyms · Cumberland Mall, 3849 S Delsea Dr, Suite E000, Vineland, NJ 08360 · Open every day 4AM to 12AM</p>
   <p><a href="/privacy-policy/">Privacy Policy</a> · <a href="/terms-of-service/">Terms of Service</a></p>
 </div></footer>
-<script src="/js/site.js?v=3ef859d0"></script>
+<script src="/js/site.js?v=18b2984e"></script>
 </body>
 </html>
