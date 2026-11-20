@@ -1,0 +1,392 @@
+{
+  "site": "animalparadisegyms.com",
+  "schedule": "Mondays and Thursdays, 8:52 AM America/New_York",
+  "source": "Google Search Console (Aug to Nov 2026) + local intent research",
+  "posts": [
+    {
+      "planned": "2026-11-23",
+      "slug": "cardio-before-or-after-weights",
+      "title": "Cardio Before or After Weights? What to Do for Your Goal",
+      "keyword": "cardio before or after weights",
+      "secondary": [
+        "does cardio before lifting kill gains",
+        "cardio after lifting",
+        "should i do cardio before or after lifting"
+      ],
+      "cat": "Training",
+      "notes": "Support the ranking 'does cardio kill gains' post. GSC: ~270 impressions on before/after lifting queries.",
+      "must_link": "does-cardio-kill-gains-why-cardio-matters-when-bulking-or-cutting",
+      "status": "todo",
+      "published": null
+    },
+    {
+      "planned": "2026-11-26",
+      "slug": "staying-on-track-over-the-holidays",
+      "title": "How to Stay on Track Through Thanksgiving and the Holidays",
+      "keyword": "how to not gain weight over the holidays",
+      "secondary": [
+        "holiday workout plan",
+        "thanksgiving workout",
+        "maintain weight during holidays"
+      ],
+      "cat": "Nutrition",
+      "notes": "Seasonal. Mention the gym is open 4AM to 12AM every day.",
+      "must_link": null,
+      "status": "todo",
+      "published": null
+    },
+    {
+      "planned": "2026-11-30",
+      "slug": "how-much-cardio-while-cutting",
+      "title": "How Much Cardio Should You Do While Cutting?",
+      "keyword": "cardio while cutting",
+      "secondary": [
+        "cardio on a cut",
+        "cardio for cutting",
+        "cutting cardio",
+        "best cardio for fat loss"
+      ],
+      "cat": "Training",
+      "notes": "Cardio cluster. GSC: ~160 impressions, position 7 to 10.",
+      "must_link": "does-cardio-kill-gains-why-cardio-matters-when-bulking-or-cutting",
+      "status": "todo",
+      "published": null
+    },
+    {
+      "planned": "2026-12-03",
+      "slug": "gym-with-daycare-vineland-nj",
+      "title": "Gyms With Childcare Near Vineland, NJ: How Daycare Works",
+      "keyword": "gym with daycare near me",
+      "secondary": [
+        "gyms with childcare",
+        "gym with kids club",
+        "gimnasio con guarderia"
+      ],
+      "cat": "Local guide",
+      "notes": "GSC daycare queries. Use only daycare facts from FACTS.md.",
+      "must_link": null,
+      "status": "todo",
+      "published": null
+    },
+    {
+      "planned": "2026-12-07",
+      "slug": "sauna-after-workout",
+      "title": "Sauna After a Workout: Benefits, How Long and When to Skip It",
+      "keyword": "sauna after workout",
+      "secondary": [
+        "sauna benefits",
+        "is sauna good after workout",
+        "gym with sauna near me"
+      ],
+      "cat": "Recovery",
+      "notes": "GSC: sauna near me queries. Sauna is included with every plan.",
+      "must_link": "sauna-massage-compression-recovery",
+      "status": "todo",
+      "published": null
+    },
+    {
+      "planned": "2026-12-10",
+      "slug": "core-exercises-for-beginners",
+      "title": "7 Core Exercises for Beginners (Including the Stomach Vacuum)",
+      "keyword": "core exercises for beginners",
+      "secondary": [
+        "beginner ab workout",
+        "deep core exercises",
+        "ab exercises at the gym"
+      ],
+      "cat": "Training",
+      "notes": "Builds topical authority around the stomach vacuum post (13k impressions/month). Link to it.",
+      "must_link": "what-is-the-stomach-vacuum-the-deep-core-exercise-everyone-should-know",
+      "status": "todo",
+      "published": null
+    },
+    {
+      "planned": "2026-12-14",
+      "slug": "does-lifting-make-women-bulky",
+      "title": "Strength Training for Women: Will Lifting Weights Make You Bulky?",
+      "keyword": "does lifting make women bulky",
+      "secondary": [
+        "strength training for women",
+        "weight lifting for women beginners",
+        "women only gym"
+      ],
+      "cat": "Lioness Den",
+      "notes": "Lioness Den tie-in. Platinum and Diamond are women-only plans.",
+      "must_link": "womens-only-gym-south-jersey",
+      "status": "todo",
+      "published": null
+    },
+    {
+      "planned": "2026-12-17",
+      "slug": "gyms-in-south-jersey",
+      "title": "Gyms in South Jersey: What to Look For Before You Join",
+      "keyword": "best gyms in south jersey",
+      "secondary": [
+        "gyms in south jersey",
+        "gyms near millville nj",
+        "fitness club millville nj"
+      ],
+      "cat": "Local guide",
+      "notes": "GSC: position 4 to 5 already. Mention Millville, Bridgeton, Glassboro drive times generally (no exact minutes unless verified).",
+      "must_link": "best-gym-vineland-nj",
+      "status": "todo",
+      "published": null
+    },
+    {
+      "planned": "2026-12-21",
+      "slug": "how-to-start-going-to-the-gym",
+      "title": "How to Start Going to the Gym: A Simple 4-Week Plan",
+      "keyword": "how to start going to the gym",
+      "secondary": [
+        "how to start working out",
+        "gym for beginners",
+        "new year gym plan"
+      ],
+      "cat": "Beginners",
+      "notes": "Publish before January so it can rank for New Year searches.",
+      "must_link": "beginner-gym-workout-plan-for-strength-training",
+      "status": "todo",
+      "published": null
+    },
+    {
+      "planned": "2026-12-24",
+      "slug": "gym-anxiety",
+      "title": "Gym Anxiety: How to Feel Confident on Your First Day",
+      "keyword": "gym anxiety",
+      "secondary": [
+        "how to overcome gym anxiety",
+        "nervous to go to the gym",
+        "first time at the gym"
+      ],
+      "cat": "Beginners",
+      "notes": "Beginner-friendly brand position. Mention free tours.",
+      "must_link": "first-week-at-the-gym-beginners",
+      "status": "todo",
+      "published": null
+    },
+    {
+      "planned": "2026-12-28",
+      "slug": "full-body-workout-for-beginners",
+      "title": "3-Day Full Body Workout for Beginners",
+      "keyword": "full body workout for beginners",
+      "secondary": [
+        "full body gym workout",
+        "full body workout plan",
+        "beginner full body routine"
+      ],
+      "cat": "Beginners",
+      "notes": "Supports the beginner plan post (ranking position ~30). Different angle: exercise technique cues. Link to it.",
+      "must_link": "beginner-gym-workout-plan-for-strength-training",
+      "status": "todo",
+      "published": null
+    },
+    {
+      "planned": "2026-12-31",
+      "slug": "fitness-resolutions-that-stick",
+      "title": "How to Make Your Fitness Resolution Stick This Year",
+      "keyword": "fitness new year resolutions",
+      "secondary": [
+        "new year fitness goals",
+        "how to stick to a workout routine",
+        "gym motivation"
+      ],
+      "cat": "Beginners",
+      "notes": "Seasonal, January demand peak.",
+      "must_link": null,
+      "status": "todo",
+      "published": null
+    },
+    {
+      "planned": "2027-01-04",
+      "slug": "how-much-protein-to-build-muscle",
+      "title": "How Much Protein Do You Need to Build Muscle?",
+      "keyword": "how much protein to build muscle",
+      "secondary": [
+        "how much protein per day",
+        "protein for muscle gain",
+        "high protein foods"
+      ],
+      "cat": "Nutrition",
+      "notes": "Mention Animal Cafe protein shakes.",
+      "must_link": "protein-shake-before-or-after-workout",
+      "status": "todo",
+      "published": null
+    },
+    {
+      "planned": "2027-01-07",
+      "slug": "fit3d-body-scan",
+      "title": "What a Fit3D Body Scan Shows (and Why the Scale Lies)",
+      "keyword": "fit3d body scan",
+      "secondary": [
+        "body composition scan",
+        "3d body scan",
+        "body fat scan near me"
+      ],
+      "cat": "Training",
+      "notes": "Fit3D is $20 per scan at the gym.",
+      "must_link": "how-long-does-it-actually-take-to-see-results-from-working-out",
+      "status": "todo",
+      "published": null
+    },
+    {
+      "planned": "2027-01-11",
+      "slug": "red-light-therapy-muscle-recovery",
+      "title": "Red Light Therapy for Muscle Recovery: What the Research Says",
+      "keyword": "red light therapy for muscle recovery",
+      "secondary": [
+        "red light therapy benefits",
+        "red light therapy near me",
+        "red light therapy for athletes"
+      ],
+      "cat": "Recovery",
+      "notes": "Be conservative and cite research honestly; no medical promises. No prices (not published).",
+      "must_link": "sauna-massage-compression-recovery",
+      "status": "todo",
+      "published": null
+    },
+    {
+      "planned": "2027-01-14",
+      "slug": "workout-split-for-beginners",
+      "title": "Full Body vs Upper Lower vs Push Pull Legs: Best Split for Beginners",
+      "keyword": "workout split for beginners",
+      "secondary": [
+        "push pull legs",
+        "upper lower split",
+        "best workout split"
+      ],
+      "cat": "Training",
+      "notes": "Training cluster.",
+      "must_link": "beginner-gym-workout-plan-for-strength-training",
+      "status": "todo",
+      "published": null
+    },
+    {
+      "planned": "2027-01-18",
+      "slug": "pre-workout-for-beginners",
+      "title": "Pre-Workout for Beginners: What Is in It and Is It Safe?",
+      "keyword": "pre workout for beginners",
+      "secondary": [
+        "what does pre workout do",
+        "is pre workout safe",
+        "best pre workout"
+      ],
+      "cat": "Supplements",
+      "notes": "Animal Supps tie-in (100+ brands, bought direct). No specific product claims.",
+      "must_link": "creatine-for-beginners",
+      "status": "todo",
+      "published": null
+    },
+    {
+      "planned": "2027-01-21",
+      "slug": "back-to-the-gym-after-baby",
+      "title": "Getting Back to the Gym After Baby: A Gentle Guide for Moms",
+      "keyword": "postpartum workout",
+      "secondary": [
+        "postpartum exercise",
+        "workout for moms",
+        "gym with daycare"
+      ],
+      "cat": "Lioness Den",
+      "notes": "Must tell readers to get clearance from their healthcare provider. Daycare + Lioness Den tie-in.",
+      "must_link": "gym-with-daycare-vineland-nj",
+      "status": "todo",
+      "published": null
+    },
+    {
+      "planned": "2027-01-25",
+      "slug": "bikini-competition-prep",
+      "title": "Bikini Competition Prep: The 16-Week Overview",
+      "keyword": "bikini competition prep",
+      "secondary": [
+        "how to prepare for a bikini competition",
+        "npc bikini",
+        "first bikini competition"
+      ],
+      "cat": "Contest prep",
+      "notes": "Chuck does NPC contest prep. Posing room on site.",
+      "must_link": "first-npc-show-prep-guide",
+      "status": "todo",
+      "published": null
+    },
+    {
+      "planned": "2027-01-28",
+      "slug": "progressive-overload",
+      "title": "Progressive Overload: How to Keep Getting Stronger",
+      "keyword": "progressive overload",
+      "secondary": [
+        "how to get stronger",
+        "how to increase weight lifting",
+        "strength plateau"
+      ],
+      "cat": "Training",
+      "notes": "Training cluster.",
+      "must_link": "training-to-hit-failure-7-techniques-that-work",
+      "status": "todo",
+      "published": null
+    },
+    {
+      "planned": "2027-02-01",
+      "slug": "best-time-to-work-out",
+      "title": "Morning vs Night: What Is the Best Time to Work Out?",
+      "keyword": "best time to work out",
+      "secondary": [
+        "morning vs evening workout",
+        "working out at night",
+        "early morning gym"
+      ],
+      "cat": "Training",
+      "notes": "Tie to 4AM to 12AM hours.",
+      "must_link": "gym-open-late-vineland-nj",
+      "status": "todo",
+      "published": null
+    },
+    {
+      "planned": "2027-02-04",
+      "slug": "acai-bowl-before-or-after-workout",
+      "title": "Acai Bowl Before or After a Workout?",
+      "keyword": "acai bowl before workout",
+      "secondary": [
+        "is acai bowl healthy",
+        "acai bowl near me",
+        "pre workout snack"
+      ],
+      "cat": "Nutrition",
+      "notes": "Animal Cafe tie-in.",
+      "must_link": "protein-shake-before-or-after-workout",
+      "status": "todo",
+      "published": null
+    },
+    {
+      "planned": "2027-02-08",
+      "slug": "how-to-choose-a-personal-trainer",
+      "title": "How to Choose a Personal Trainer: 9 Questions to Ask",
+      "keyword": "how to choose a personal trainer",
+      "secondary": [
+        "personal trainer near me",
+        "is a personal trainer worth it",
+        "female personal trainer"
+      ],
+      "cat": "Training",
+      "notes": "Personal training is separate from membership; first consultation free.",
+      "must_link": "do-i-really-need-a-personal-trainerheres-how-to-know",
+      "status": "todo",
+      "published": null
+    },
+    {
+      "planned": "2027-02-11",
+      "slug": "partner-workouts",
+      "title": "Partner Workouts to Try This Valentine's Week",
+      "keyword": "partner workout",
+      "secondary": [
+        "couples workout",
+        "workout with a friend",
+        "partner exercises gym"
+      ],
+      "cat": "Training",
+      "notes": "Seasonal.",
+      "must_link": null,
+      "status": "todo",
+      "published": null
+    }
+  ]
+}

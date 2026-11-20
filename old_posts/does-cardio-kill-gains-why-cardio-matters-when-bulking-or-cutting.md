@@ -1,7 +1,11 @@
-title: Does Cardio Kill Gains? Why Cardio Matters When Bulking or Cutting
+title: Does Cardio Kill Gains? How Much Cardio to Do When Bulking or Cutting
 date: 2026-07-14
 cat: Training
 img: cardio-floor
+desc: Does cardio kill gains? What the research says, how much cardio to do while bulking or cutting, and whether to do it before or after lifting.
+keyword: does cardio kill gains
+lead: No, cardio does not kill gains when you dose it right. Two to three sessions of 20 to 30 minutes a week, mostly walking, cycling or incline work, supports heart health and recovery without hurting muscle growth. Problems only show up with very high cardio volume, hard running right before leg day, or not eating enough to cover it.
+links: personal-training.html|Get a coach to plan your cardio; the-gym.html|Cardio floor and equipment; protein-shake-before-or-after-workout.html|Protein shake before or after a workout?
 ---
 If you think cardio is only for weight loss, you are missing one of the most underrated tools for building a better physique.
 
@@ -267,3 +271,23 @@ You do not need to become a runner. You do not need to love cardio. But if you c
 ## Final Thoughts
 
 Want help building a training routine that supports your goal? Visit Animal Paradise Gym in Vineland, NJ, located inside Cumberland Mall, and ask our team about training, cardio, conditioning, and recovery options.
+
+## Frequently asked questions
+
+### Does cardio before lifting kill gains?
+A short warm-up of 5 to 10 easy minutes helps. Long or hard cardio right before lifting can drain the energy you need for heavy sets, especially before leg day. If muscle is the goal, lift first and do your cardio after, or on a separate day.
+
+### Does cardio after lifting kill gains?
+No. Easy to moderate cardio after lifting, like 15 to 30 minutes of walking, incline treadmill or cycling, does not hurt muscle growth for most people. Keep it moderate, and eat enough to cover the extra energy.
+
+### How much cardio should I do while bulking?
+Two to three sessions of 20 to 30 minutes a week is a good starting point, plus a daily step goal. That keeps your heart and conditioning healthy and makes the bulk feel easier, without slowing muscle gain.
+
+### How much cardio should I do while cutting?
+Start with 3 to 4 sessions of 20 to 40 minutes a week, mostly low intensity, and keep your lifting heavy. Add cardio slowly when fat loss stalls instead of cutting food too aggressively. Daily walking does a lot of the work.
+
+### Does doing cardio every day kill gains?
+Not if most of it is low intensity, like walking. Daily hard cardio on top of heavy lifting can hurt recovery. Keep hard sessions to 2 or 3 a week and make sure you eat enough protein and calories.
+
+### Is HIIT or steady cardio better for building muscle?
+Low-intensity steady cardio is easier to recover from, so it fits best while bulking. HIIT is time-efficient but harder on your legs, so use it sparingly and keep it away from leg day.

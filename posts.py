@@ -302,14 +302,47 @@ faq=[("How long does it take to see results from the gym?","Most people feel bet
 links=[("first-week-at-the-gym-beginners.html","Your first week at the gym"),("personal-training.html","Free coach consultation")]),
 ]
 
-# ---- migrated posts from the old WordPress site (same URLs, original wording) ----
-import glob as _g, os as _o, re as _r, markdown as _md
-for _f in sorted(_g.glob(_o.path.join("old_posts", "*.md"))):
-    _raw = open(_f).read()
+# ---- markdown posts: old_posts/ (migrated WordPress posts) and content/posts/ (new posts, written by the blog agent) ----
+# File format: "key: value" front matter lines, a line with ---, then markdown.
+# Front matter: title, date (YYYY-MM-DD), cat, img (photo key from photos.json); optional: desc, keyword, lead, links.
+#   links: "page.html|Label; other-page.html|Other label"
+# An optional "## Frequently asked questions" section with "### Question" headings becomes the FAQ block + FAQPage schema.
+# Posts dated in the future are skipped until that date (so a post can be written ahead and go live on its day).
+import glob as _g, os as _o, re as _r, datetime as _dt, markdown as _md
+
+def _style_tables(html):
+    # markdown tables -> the site's .post-tbl (stacks into labelled cards on phones)
+    def one(m):
+        t = m.group(0)
+        heads = [_r.sub(r"<[^>]+>", "", h).strip() for h in _r.findall(r"<th[^>]*>(.*?)</th>", t, _r.S)]
+        def row(rm):
+            cells = iter(heads)
+            return _r.sub(r"<td([^>]*)>", lambda c: f'<td{c.group(1)} data-label="{next(cells, "")}">', rm.group(0))
+        t = _r.sub(r"<tbody>.*?</tbody>", lambda b: _r.sub(r"<tr>.*?</tr>", row, b.group(0), flags=_r.S), t, flags=_r.S)
+        return t.replace("<table>", '<table class="post-tbl">', 1)
+    return _r.sub(r"<table>.*?</table>", one, html, flags=_r.S)
+
+def _load_md_post(_f):
+    _raw = open(_f, encoding="utf-8").read()
     _meta, _txt = _raw.split("\n---\n", 1)
-    _m = dict(l.split(": ", 1) for l in _meta.strip().splitlines())
-    _plain = _r.sub(r"\s+", " ", _r.sub(r"[#*_>\-]", " ", _txt)).strip()
-    _desc = _plain[:150].rsplit(" ", 1)[0] + "..."
-    POSTS.append(dict(slug=_o.path.basename(_f)[:-3], title=_m["title"], desc=_desc, kw=_m["title"], cat=_m["cat"],
-                      date=_m["date"], img=_m["img"], lead=None, body=_md.markdown(_txt), faq=[],
-                      links=[("personal-training.html", "Personal training"), ("visit.html", "Book a free tour")]))
+    _m = dict(l.split(": ", 1) for l in _meta.strip().splitlines() if ": " in l)
+    _faq = []
+    _parts = _r.split(r"\n## Frequently asked questions\s*\n", _txt, maxsplit=1, flags=_r.I)
+    if len(_parts) == 2:
+        _txt, _fq = _parts
+        for _blk in _r.split(r"\n?### ", "\n" + _fq)[1:]:
+            _q, _, _a = _blk.partition("\n")
+            _a = _r.sub(r"\s+", " ", _a).strip()
+            if _q.strip() and _a: _faq.append((_q.strip(), _a))
+    _plain = _r.sub(r"\s+", " ", _r.sub(r"[#*_>\-\[\]()]", " ", _txt)).strip()
+    _desc = _m.get("desc") or (_plain[:150].rsplit(" ", 1)[0] + "...")
+    _links = [tuple(x.strip().split("|", 1)) for x in _m.get("links", "").split(";") if "|" in x] \
+        or [("personal-training.html", "Personal training"), ("visit.html", "Book a free tour")]
+    return dict(slug=_o.path.basename(_f)[:-3], title=_m["title"], desc=_desc, kw=_m.get("keyword", _m["title"]), cat=_m["cat"],
+                date=_m["date"], img=_m["img"], lead=_m.get("lead"), body=_style_tables(_md.markdown(_txt, extensions=["tables"])), faq=_faq, links=_links)
+
+_today = _dt.date.today().isoformat()
+for _f in sorted(_g.glob(_o.path.join("old_posts", "*.md")) + _g.glob(_o.path.join("content", "posts", "*.md"))):
+    _p = _load_md_post(_f)
+    if _p["date"] <= _today:
+        POSTS.append(_p)

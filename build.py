@@ -29,13 +29,13 @@ def crumbs_ld(name, slug):
         {"@type": "ListItem", "position": 2, "name": name, "item": f"{SITE}/{slug}/"}]}
 
 SEO_SHORT = {
-    "does-cardio-kill-gains-why-cardio-matters-when-bulking-or-cutting": "Does Cardio Kill Gains? Cardio When Bulking or Cutting",
+    "does-cardio-kill-gains-why-cardio-matters-when-bulking-or-cutting": "Does Cardio Kill Gains? How Much Cardio When Bulking or Cutting",
     "mobility-and-strength-training-why-better-movement-can-help-you-lift-better": "Mobility and Strength Training: Move Better, Lift Better",
     "should-you-work-out-when-youre-sore-a-physical-therapy-inspired-recovery-guide": "Should You Work Out When Sore? A Recovery Guide",
     "the-strategies-experienced-lifters-use-to-build-muscle-without-gaining-excess-fat": "How to Build Muscle Without Gaining Excess Fat",
     "the-strategies-experienced-lifters-use-to-lose-fat-without-sacrificing-muscle": "How to Lose Fat Without Losing Muscle",
     "what-makes-a-good-gym-in-2026-what-to-look-for-before-you-join-or-build-one": "What Makes a Good Gym in 2026? What to Look For",
-    "what-is-the-stomach-vacuum-the-deep-core-exercise-everyone-should-know": "What Is the Stomach Vacuum? The Deep Core Exercise",
+    "what-is-the-stomach-vacuum-the-deep-core-exercise-everyone-should-know": "What Is the Stomach Vacuum? How to Do It and Does It Work",
     "gym-open-late-vineland-nj": "Late-Night and Early-Morning Gym in Vineland NJ",
     "sauna-massage-compression-recovery": "Sauna, Massage Chairs and Compression: Recovery Guide",
     "first-week-at-the-gym-beginners": "Your First Week at the Gym: A Beginner Plan",
@@ -1748,6 +1748,9 @@ bf_thanks("black-friday-coaching.html", "black-friday/coaching", "Free Session W
     '<p class="lp-note">Not a member yet? The Black Friday $1 first month and free body scan run until November 30. Ask about it at your session. Personal training is booked separately from membership.</p>')
 
 # ---------- write ----------
+import glob as _glob
+for _old in _glob.glob(os.path.join(OUT, "*.html")) + _glob.glob(os.path.join("deploy", "*.html")):
+    os.remove(_old)  # start clean so deleted or unpublished pages never linger
 for fn, p in PAGES.items():
     full = fn != "index.html"
     if p.get("bare"):
