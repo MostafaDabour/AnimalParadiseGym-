@@ -289,7 +289,7 @@ p{margin:0}
 
 /* footer */
 footer{border-top:1px solid var(--line);padding-block:64px 110px;font-size:15px;color:var(--muted)}
-.foot{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:32px}
+.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:28px}
 .foot img{height:52px;width:auto}
 .foot .fh{font-family:var(--wide);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);margin:0 0 16px;font-weight:400}
 .foot ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}

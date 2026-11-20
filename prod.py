@@ -54,6 +54,8 @@ for fn, (url, html) in pages.items():
     if fn in ("404.html", "thank-you.html", "parent-consent-form.html") or fn.startswith("black-friday"):
         out = out.replace("<title>", '<meta name="robots" content="noindex">\n<title>', 1)
     if fn == "404.html":
+        out = re.sub(r'<link rel="canonical"[^>]*>\n?', '', out)
+        out = re.sub(r'<meta property="og:url"[^>]*>\n?', '', out)
         path = os.path.join(OUT, "404.html")
     else:
         path = os.path.join(OUT, url.strip("/"), "index.html") if url != "/" else os.path.join(OUT, "index.html")

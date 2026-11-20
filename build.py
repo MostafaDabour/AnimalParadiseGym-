@@ -111,6 +111,11 @@ def closer(h1="Come see", h2="it for yourself."):
 </section>
 '''
 
+POPULAR = [("what-is-the-stomach-vacuum", "Stomach vacuum guide"), ("does-cardio-kill-gains", "Does cardio kill gains?"), ("beginner-gym-workout-plan", "Beginner workout plan"), ("training-to-hit-failure", "Training to failure"), ("do-i-really-need-a-personal-trainer", "Do you need a trainer?")]
+def POPULAR_POSTS():
+    try: ps = POSTS
+    except NameError: return []
+    return [(p, l) for k, l in POPULAR for p in ps if p["slug"].startswith(k)][:5]
 def footer(full):
     links = "".join(f'<li><a href="{h}">{t}</a></li>' for h, t in NAV + [("gallery.html", "Gallery"), ("faq.html", "FAQ"), ("parent-consent-form.html", "Parent consent waiver")])
     end = "</body>\n</html>\n" if full else ""
@@ -123,11 +128,12 @@ def footer(full):
         <p style="max-width:36ch">The full-service gym inside Cumberland Mall in Vineland, NJ. Open every day, 4AM to 12AM.</p>
       </div>
       <div><h2 class="fh">Explore</h2><ul>{links}</ul></div>
+      <div><h2 class="fh">Popular guides</h2><ul>{"".join(f'<li><a href="{x["slug"]}.html">{l}</a></li>' for x, l in POPULAR_POSTS())}</ul></div>
       <div><h2 class="fh">Visit</h2><ul><li>3849 S Delsea Dr, Suite E000</li><li>Cumberland Mall, Vineland, NJ 08360</li><li>(856) 839-4536</li><li>Info@AnimalParadiseGyms.com</li><li><a href="visit.html">Hours and directions</a></li></ul></div>
       <div><h2 class="fh">Follow</h2><ul>
         <li><a target="_blank" rel="noopener" href="https://animalcafe.net/">Animal Cafe site</a></li>
         <li><a target="_blank" rel="noopener" href="https://animalsupps.co/">Shop Animal Supps</a></li>
-        <li><a target="_blank" rel="noopener" href="https://www.instagram.com/animalparadisegyms">Instagram</a></li>
+        <li><a target="_blank" rel="noopener" href="https://www.instagram.com/animalparadisegyms/">Instagram</a></li>
         <li><a target="_blank" rel="noopener" href="https://www.facebook.com/profile.php?id=61560036899811">Facebook</a></li>
         <li><a target="_blank" rel="noopener" href="https://apps.apple.com/us/app/animal-paradise-gym/id6745569852">App Store</a></li>
         <li><a target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=com.trainerize.animalparadisegyms">Google Play</a></li>
@@ -271,7 +277,8 @@ FAQ_AMEN = [
 ]
 
 GYM_LD = {
-    "@context": "https://schema.org", "@type": ["ExerciseGym", "HealthClub"], "@id": SITE + "/#gym",
+    "@context": "https://schema.org", "@type": ["ExerciseGym", "HealthClub", "Organization"], "@id": SITE + "/#gym",
+    "legalName": "Animal Paradise Gyms", "contactPoint": {"@type": "ContactPoint", "telephone": "+1-856-839-4536", "contactType": "customer service", "email": "Info@AnimalParadiseGyms.com", "areaServed": "US"},
     "name": "Animal Paradise Gyms", "url": SITE + "/",
     "logo": SITE + "/img/logo.png",
     "image": SITE + "/img/photos/vineland-gym-hero-floor.webp",
@@ -285,7 +292,7 @@ GYM_LD = {
     "geo": {"@type": "GeoCoordinates", "latitude": 39.4303531, "longitude": -75.0358536},
     "hasMap": "https://maps.google.com/?cid=17617315884172549154",
     "containedInPlace": {"@type": "ShoppingCenter", "name": "Cumberland Mall", "address": "3849 S Delsea Dr, Vineland, NJ 08360"},
-    "sameAs": ["https://www.instagram.com/animalparadisegyms", "https://www.facebook.com/profile.php?id=61560036899811", "https://apps.apple.com/us/app/animal-paradise-gym/id6745569852", "https://maps.google.com/?cid=17617315884172549154"],
+    "sameAs": ["https://www.instagram.com/animalparadisegyms/", "https://play.google.com/store/apps/details?id=com.trainerize.animalparadisegyms", "https://animalcafe.net/", "https://animalsupps.co/", "https://www.facebook.com/profile.php?id=61560036899811", "https://apps.apple.com/us/app/animal-paradise-gym/id6745569852", "https://maps.google.com/?cid=17617315884172549154"],
 }
 
 ICONS = dict(
@@ -775,7 +782,7 @@ PAGES["about.html"] = dict(
       <h2>Our biggest day <span class="gold">of the year.</span></h2>
       <p>Every year we host Animal Fest: guest posing, competitions, vendors and the whole crew under one roof. The third Animal Fest took place in October 2026. Follow us on Instagram to hear first about the next one.</p>
       <p><a class="btn btn-gold" href="animal-fest-3.html">Animal Fest 3 recap {ARROW}</a></p>
-      <p><a class="btn btn-glass" target="_blank" rel="noopener" href="https://www.instagram.com/animalparadisegyms">Follow on Instagram {ARROW}</a></p>
+      <p><a class="btn btn-glass" target="_blank" rel="noopener" href="https://www.instagram.com/animalparadisegyms/">Follow on Instagram {ARROW}</a></p>
     </div>
   </div>
   <div class="wrap cards" style="margin-top:14px">
@@ -1148,7 +1155,7 @@ PAGES["events.html"] = dict(
         <span class="role">Coming soon</span>
         <h3>Stay in the loop</h3>
         <p>Competitions, guest posing, seminars and member nights. Announcements go out on Instagram first.</p>
-        <div class="hero-cta" style="margin-top:6px"><a class="btn btn-gold" target="_blank" rel="noopener" href="https://www.instagram.com/animalparadisegyms">Follow on Instagram {ARROW}</a></div>
+        <div class="hero-cta" style="margin-top:6px"><a class="btn btn-gold" target="_blank" rel="noopener" href="https://www.instagram.com/animalparadisegyms/">Follow on Instagram {ARROW}</a></div>
       </div>
     </div>
   </div>
@@ -1277,8 +1284,12 @@ PAGES["blog.html"] = dict(
 {closer("Stop reading.", "Start training.")}''')
 
 for p in POSTS:
-    others = [o for o in POSTS if o["slug"] != p["slug"] and o["cat"] == p["cat"]][:2]
-    others += [o for o in POSTS if o["slug"] != p["slug"] and o not in others][:3 - len(others)]
+    _same = [o for o in POSTS if o["cat"] == p["cat"]]
+    _k = _same.index(p) if p in _same else 0
+    others = [_same[(_k + d) % len(_same)] for d in (1, -1) if len(_same) > 1]
+    others = [o for i, o in enumerate(others) if o is not p and o not in others[:i]]
+    _all = POSTS.index(p)
+    others += [o for o in (POSTS[(_all + d) % len(POSTS)] for d in (2, 3, 4, 5)) if o is not p and o not in others][:3 - len(others)]
     crumb = f'<ol class="crumbs"><li><a href="index.html">Home</a></li><li><a href="blog.html">Blog</a></li><li aria-current="page">{p["cat"]}</li></ol>'
     answer = f'<p class="answer"><strong>Short answer:</strong> {p["lead"]}</p>' if p["lead"] else ""
     faqblock = (f'<div class="article-faq faq"><h2>Quick answers</h2><div class="faq-list">{faq_html(p["faq"], open_first=False)}</div></div>') if p["faq"] else ""
